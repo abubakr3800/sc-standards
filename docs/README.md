@@ -1,6 +1,30 @@
 # AI Standards Training System
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![GitHub](https://img.shields.io/badge/GitHub-sc--standards-green.svg)](https://github.com/abubakr3800/sc-standards)
+
 A comprehensive AI system for processing, understanding, and comparing lighting standards from PDF documents in multiple languages.
+
+**Developed by [Short Circuit Company](mailto:Scc@shortcircuitcompany.com)**
+
+## 📋 Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Web Interface](#web-interface)
+- [API Endpoints](#api-endpoints)
+- [System Architecture](#system-architecture)
+- [Configuration](#configuration)
+- [Supported Languages](#supported-languages)
+- [Standards Categories](#standards-categories)
+- [Example Usage](#example-usage)
+- [Output Files](#output-files)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Features
 
@@ -13,7 +37,11 @@ A comprehensive AI system for processing, understanding, and comparing lighting 
 
 ## Installation
 
-1. **Clone or download the system files**
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/abubakr3800/sc-standards.git
+   cd sc-standards
+   ```
 
 2. **Place your PDF standards files in the `base/` folder**:
    ```bash
@@ -25,7 +53,7 @@ A comprehensive AI system for processing, understanding, and comparing lighting 
 
    **Method A: Automatic installation (recommended)**:
    ```bash
-   python install.py
+   python scripts/install.py
    ```
 
    **Method B: Manual installation**:
@@ -35,6 +63,12 @@ A comprehensive AI system for processing, understanding, and comparing lighting 
    python -m spacy download de_core_news_sm
    python -m spacy download fr_core_news_sm
    # Add other language models as needed
+   ```
+
+   **Method C: Using Make**:
+   ```bash
+   make setup
+   make install
    ```
 
    **Note**: If you encounter Python version compatibility issues, use the automatic installer which handles version conflicts.
@@ -114,25 +148,25 @@ Access the API at `http://localhost:8000` when running `python main.py api`
 
 ### Core Components
 
-1. **PDF Processor** (`pdf_processor.py`)
+1. **PDF Processor** (`src/ai_standards/core/pdf_processor.py`)
    - Multi-method PDF text extraction (pdfplumber, PyMuPDF, pdfminer)
    - Language detection and translation
    - Text preprocessing and chunking
    - Structured data extraction
 
-2. **AI Trainer** (`ai_trainer.py`)
+2. **AI Trainer** (`src/ai_standards/models/ai_trainer.py`)
    - Sentence transformer fine-tuning
    - Classification model training
    - Vector database integration
    - Training pipeline management
 
-3. **Comparison Model** (`comparison_model.py`)
+3. **Comparison Model** (`src/ai_standards/models/comparison_model.py`)
    - Semantic similarity analysis
    - Category-specific comparisons
    - Compliance checking
    - Recommendation generation
 
-4. **Web Interface** (`web_interface.py`)
+4. **Web Interface** (`src/ai_standards/web/web_interface.py`)
    - Streamlit dashboard
    - FastAPI REST endpoints
    - Interactive visualizations
@@ -149,12 +183,14 @@ PDF Files → PDF Processor → Training Data → AI Trainer → Trained Models
 
 ## Configuration
 
-Edit `config.py` to customize:
+Edit `src/ai_standards/core/config.py` to customize:
 
 - **PDF Processing**: Supported languages, extraction methods, chunk sizes
 - **AI Models**: Model names, training parameters, batch sizes
 - **Comparison**: Similarity thresholds, feature weights
 - **Database**: Storage paths and settings
+
+You can also use environment variables by copying `configs/env_template` to `.env` and modifying the values.
 
 ## Supported Languages
 
@@ -255,13 +291,33 @@ Check `logs/app.log` for detailed error messages and system information.
 
 ## Contributing
 
-To extend the system:
+We welcome contributions! To extend the system:
 
-1. Add new PDF extraction methods in `pdf_processor.py`
-2. Implement additional comparison metrics in `comparison_model.py`
-3. Add new visualization components in `web_interface.py`
-4. Extend the API with new endpoints
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Add new PDF extraction methods in `src/ai_standards/core/pdf_processor.py`
+4. Implement additional comparison metrics in `src/ai_standards/models/comparison_model.py`
+5. Add new visualization components in `src/ai_standards/web/web_interface.py`
+6. Extend the API with new endpoints
+7. Commit your changes (`git commit -m 'Add some amazing feature'`)
+8. Push to the branch (`git push origin feature/amazing-feature`)
+9. Open a Pull Request
 
 ## License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 This system is designed for processing and analyzing lighting standards documents. Please ensure compliance with relevant copyright and usage restrictions for the standards documents you process.
+
+## Contact
+
+**Short Circuit Company**
+- Email: [Scc@shortcircuitcompany.com](mailto:Scc@shortcircuitcompany.com)
+- GitHub: [https://github.com/abubakr3800/sc-standards](https://github.com/abubakr3800/sc-standards)
+
+## Acknowledgments
+
+- Built with modern Python AI/ML libraries
+- Uses state-of-the-art NLP models for text processing
+- Implements professional software engineering practices
+- Designed for scalability and maintainability

@@ -12,7 +12,7 @@ import pdfplumber
 import fitz  # PyMuPDF
 from pdfminer.high_level import extract_text
 from langdetect import detect, LangDetectException
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 import spacy
 from loguru import logger
 
@@ -22,7 +22,7 @@ class PDFProcessor:
     """Handles PDF text extraction and preprocessing"""
     
     def __init__(self):
-        self.translator = Translator()
+        self.translator = GoogleTranslator()
         self.nlp_models = {}
         self._load_nlp_models()
         
@@ -128,8 +128,10 @@ class PDFProcessor:
             
             for chunk in chunks:
                 if chunk.strip():
-                    result = self.translator.translate(chunk, dest=target_language)
-                    translated_chunks.append(result.text)
+                    # Use deep-translator with GoogleTranslator
+                    translator = GoogleTranslator(source='auto', target=target_language)
+                    translated_text = translator.translate(chunk)
+                    translated_chunks.append(translated_text)
             
             return " ".join(translated_chunks)
         except Exception as e:

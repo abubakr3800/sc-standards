@@ -9,9 +9,13 @@ help:
 	@echo "Setup Commands:"
 	@echo "  setup          - Setup environment and create .env file"
 	@echo "  install        - Install all dependencies"
+	@echo "  git-setup      - Setup Git repository with proper configuration"
+	@echo "  fix-deps       - Fix dependency conflicts"
+	@echo "  resolve-deps   - Resolve dependencies using alternative packages"
 	@echo ""
 	@echo "Processing Commands:"
 	@echo "  process        - Process PDFs in base/ folder"
+	@echo "  auto-process   - Automated processing (recommended)"
 	@echo "  train          - Train AI models from processed data"
 	@echo "  compare        - Compare two standards (requires --standard-a and --standard-b)"
 	@echo "  demo           - Run complete demo"
@@ -23,6 +27,8 @@ help:
 	@echo "Testing Commands:"
 	@echo "  test           - Run installation test"
 	@echo "  test-extract   - Test PDF extraction"
+	@echo "  evaluate       - Evaluate lighting reports against standards"
+	@echo "  demo-evaluation - Demo lighting evaluation system"
 	@echo ""
 	@echo "Docker Commands:"
 	@echo "  docker-build   - Build Docker image"
@@ -40,9 +46,21 @@ setup:
 install:
 	python scripts/install.py
 
+git-setup:
+	python scripts/setup_git.py
+
+fix-deps:
+	python scripts/fix_dependencies.py
+
+resolve-deps:
+	python scripts/resolve_dependencies.py
+
 # Processing commands
 process:
 	python main.py process
+
+auto-process:
+	python auto_process.py
 
 train:
 	python main.py train
@@ -68,6 +86,12 @@ run-web:
 # Testing commands
 test:
 	python tests/test_installation.py
+
+evaluate:
+	python simple_lighting_evaluator.py
+
+demo-evaluation:
+	python demo_lighting_evaluation.py
 
 test-extract:
 	python examples/table_extraction_demo.py

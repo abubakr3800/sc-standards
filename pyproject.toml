@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "AI Standards Team", email = "team@aistandards.com"},
+    {name = "Short Circuit Company", email = "Scc@shortcircuitcompany.com"},
 ]
 keywords = ["ai", "standards", "lighting", "pdf", "comparison", "nlp"]
 classifiers = [
@@ -79,10 +79,10 @@ gpu = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-org/ai-standards-training"
-Documentation = "https://ai-standards-training.readthedocs.io"
-Repository = "https://github.com/your-org/ai-standards-training.git"
-Issues = "https://github.com/your-org/ai-standards-training/issues"
+Homepage = "https://github.com/abubakr3800/sc-standards"
+Documentation = "https://github.com/abubakr3800/sc-standards#readme"
+Repository = "https://github.com/abubakr3800/sc-standards.git"
+Issues = "https://github.com/abubakr3800/sc-standards/issues"
 
 [project.scripts]
 ai-standards = "main:main"

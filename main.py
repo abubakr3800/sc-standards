@@ -10,7 +10,7 @@ from loguru import logger
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 from ai_standards.core.config import config
-from ai_standards.core.pdf_processor import PDFProcessor
+from ai_standards.core.simple_pdf_processor import SimplePDFProcessor
 from ai_standards.models.ai_trainer import AIStandardsTrainer
 from ai_standards.models.comparison_model import StandardsComparisonModel
 from ai_standards.web.web_interface import run_streamlit, run_fastapi
@@ -40,7 +40,7 @@ def process_pdfs_from_directory(pdf_directory: Path, target_language: str = "en"
     """Process all PDFs in a directory"""
     logger.info(f"Processing PDFs from directory: {pdf_directory}")
     
-    pdf_processor = PDFProcessor()
+    pdf_processor = SimplePDFProcessor()
     pdf_files = list(pdf_directory.glob("*.pdf"))
     
     if not pdf_files:
@@ -135,7 +135,7 @@ def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(description="AI Standards Training System")
     parser.add_argument("command", choices=[
-        "process", "train", "compare", "web", "api", "demo"
+        "process", "train", "compare", "web", "api", "demo", "dialux"
     ], help="Command to execute")
     
     parser.add_argument("--input-dir", type=Path, default=config.BASE_PDFS_DIR,
@@ -150,6 +150,8 @@ def main():
                        help="Host for API server")
     parser.add_argument("--port", type=int, default=8000,
                        help="Port for API server")
+    parser.add_argument("--file", type=Path,
+                       help="Path to Dialux PDF file for processing")
     
     args = parser.parse_args()
     
@@ -224,6 +226,25 @@ def main():
                 logger.error("Demo failed during model training")
         else:
             logger.warning("Need at least 2 PDF files for comparison demo")
+            
+    elif args.command == "dialux":
+        # Process Dialux PDF report
+        if not args.file:
+            logger.error("--file argument is required for Dialux processing")
+            return
+        
+        if not args.file.exists():
+            logger.error(f"Dialux PDF file not found: {args.file}")
+            return
+        
+        logger.info(f"Processing Dialux PDF: {args.file}")
+        try:
+            from dialux_pdf_processor import DialuxPDFProcessor, evaluate_dialux_pdf
+            evaluate_dialux_pdf()
+        except ImportError:
+            logger.error("Dialux processor not available")
+        except Exception as e:
+            logger.error(f"Failed to process Dialux PDF: {e}")
 
 if __name__ == "__main__":
     main()
