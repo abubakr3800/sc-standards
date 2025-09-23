@@ -1,0 +1,228 @@
+================================================================================
+AI STANDARDS TRAINING SYSTEM - PROJECT OVERVIEW
+================================================================================
+
+PROJECT NAME: AI Standards Training System
+VERSION: 1.0.0
+AUTHOR: Short Circuit Company
+EMAIL: Scc@shortcircuitcompany.com
+REPOSITORY: https://github.com/abubakr3800/sc-standards.git
+
+================================================================================
+PROJECT PURPOSE
+================================================================================
+
+This system is designed to:
+1. Process lighting standards from PDF documents in multiple languages
+2. Train AI models to understand and compare lighting standards
+3. Provide chat-based interface for querying lighting standards
+4. Analyze lighting studies and reports for compliance
+5. Compare different lighting standards and provide recommendations
+
+================================================================================
+MAIN FUNCTIONALITIES
+================================================================================
+
+1. PDF PROCESSING
+   - Extract text and tables from PDF documents
+   - Handle multiple languages with translation
+   - Process lighting standards (EN 12464-1, BREEAM, ISO)
+   - Extract structured data (illuminance, UGR, CRI, etc.)
+
+2. AI TRAINING
+   - Train sentence transformers for semantic understanding
+   - Create vector databases for similarity search
+   - Fine-tune models on lighting standards data
+   - Generate embeddings for comparison
+
+3. STANDARDS COMPARISON
+   - Compare different lighting standards
+   - Provide similarity scores and analysis
+   - Generate compliance reports
+   - Suggest improvements and recommendations
+
+4. CHAT INTERFACE
+   - Natural language querying of standards
+   - AI-powered question answering
+   - Context-aware responses
+   - Confidence scoring
+
+5. LIGHTING EVALUATION
+   - Analyze lighting studies and reports
+   - Check compliance with standards
+   - Provide detailed evaluation reports
+   - Generate recommendations
+
+================================================================================
+TECHNOLOGY STACK
+================================================================================
+
+CORE TECHNOLOGIES:
+- Python 3.8-3.13
+- FastAPI (Web API)
+- Streamlit (Web Interface)
+- PyMuPDF, pdfplumber, pdfminer (PDF Processing)
+- Sentence Transformers (AI Models)
+- ChromaDB (Vector Database)
+- SQLite (Data Storage)
+
+AI/ML LIBRARIES:
+- torch (PyTorch)
+- transformers (Hugging Face)
+- sentence-transformers
+- scikit-learn
+- numpy
+- pandas
+
+PDF PROCESSING:
+- PyMuPDF (fitz)
+- pdfplumber
+- pdfminer.six
+- langdetect
+- deep-translator
+
+WEB FRAMEWORKS:
+- FastAPI
+- Streamlit
+- uvicorn
+- gradio
+
+DATA PROCESSING:
+- pandas
+- numpy
+- sqlalchemy
+- chromadb
+- faiss-cpu
+
+VISUALIZATION:
+- matplotlib
+- seaborn
+- plotly
+
+UTILITIES:
+- tqdm
+- python-dotenv
+- pydantic
+- loguru
+- requests
+
+================================================================================
+PROJECT STRUCTURE
+================================================================================
+
+ROOT LEVEL:
+├── main.py                    # Main entry point
+├── requirements.txt           # Dependencies
+├── README.md                  # Project documentation
+├── setup.cfg                  # Setup configuration
+├── pyproject.toml            # Project configuration
+├── Dockerfile                # Docker configuration
+├── docker-compose.yml        # Docker Compose
+├── Makefile                  # Build commands
+└── LICENSE                   # License file
+
+SOURCE CODE (src/):
+├── ai_standards/             # Main package
+│   ├── core/                # Core functionality
+│   ├── models/              # AI models
+│   ├── evaluators/          # Evaluation modules
+│   ├── processors/          # Processing modules
+│   ├── web/                 # Web interfaces
+│   ├── api/                 # API modules
+│   └── utils/               # Utility functions
+
+DATA DIRECTORIES:
+├── base/                    # Original standards PDFs
+├── data/                    # Processed data
+├── uploads/                 # Uploaded files
+├── outputs/                 # Output files
+├── models/                  # Trained models
+└── logs/                    # Log files
+
+TOOLS AND SCRIPTS:
+├── evaluators/              # Lighting evaluation tools
+├── examples/                # Example usage
+├── tests/                   # Test files
+├── docs/                    # Documentation
+└── configs/                 # Configuration files
+
+================================================================================
+KEY FEATURES
+================================================================================
+
+1. MULTILINGUAL SUPPORT
+   - Automatic language detection
+   - Translation to English
+   - Support for 10+ languages
+
+2. ADVANCED PDF PROCESSING
+   - Multiple extraction methods
+   - Table recognition
+   - Structured data extraction
+   - Context preservation
+
+3. AI-POWERED ANALYSIS
+   - Semantic understanding
+   - Similarity search
+   - Context-aware responses
+   - Confidence scoring
+
+4. COMPREHENSIVE EVALUATION
+   - Lighting parameter analysis
+   - Compliance checking
+   - Standards comparison
+   - Recommendation generation
+
+5. USER-FRIENDLY INTERFACES
+   - Command-line interface
+   - Web interface
+   - Chat interface
+   - API endpoints
+
+================================================================================
+TARGET USERS
+================================================================================
+
+1. LIGHTING DESIGNERS
+   - Analyze lighting studies
+   - Check compliance with standards
+   - Compare different approaches
+
+2. ENGINEERS
+   - Evaluate lighting systems
+   - Generate compliance reports
+   - Access standards information
+
+3. RESEARCHERS
+   - Study lighting standards
+   - Compare international standards
+   - Analyze trends and patterns
+
+4. DEVELOPERS
+   - Integrate with existing systems
+   - Build custom applications
+   - Extend functionality
+
+================================================================================
+SUCCESS METRICS
+================================================================================
+
+PERFORMANCE:
+- PDF Processing: 90-95% accuracy
+- Text Extraction: 85-90% accuracy
+- Standards Comparison: 95-100% accuracy
+- Chat Responses: 80-85% relevance
+
+EFFICIENCY:
+- Processing Time: 2-5 minutes per PDF
+- Response Time: <2 seconds for queries
+- Memory Usage: <2GB for typical operations
+- Storage: <100MB for processed data
+
+USER EXPERIENCE:
+- Easy setup and installation
+- Intuitive interfaces
+- Comprehensive documentation
+- Reliable performance
+
+================================================================================

@@ -1,0 +1,280 @@
+================================================================================
+PDF PROCESSING SYSTEM - src/ai_standards/core/simple_pdf_processor.py
+================================================================================
+
+FILE: src/ai_standards/core/simple_pdf_processor.py
+PURPOSE: Simplified PDF processing without complex NLP dependencies
+LOCATION: src/ai_standards/core/
+DEPENDENCIES:
+- logging: Standard logging
+- pathlib.Path: Path handling
+- typing: Type hints (Dict, List, Optional, Tuple)
+- re: Regular expressions
+- json: JSON handling
+- datetime: Date/time handling
+- pdfplumber: PDF text extraction
+- fitz (PyMuPDF): Alternative PDF processing
+- pdfminer.high_level: PDF text extraction
+- langdetect: Language detection
+- loguru: Advanced logging
+
+================================================================================
+CLASS STRUCTURE
+================================================================================
+
+CLASS: SimplePDFProcessor
+PURPOSE: Simplified PDF processor for standards documents
+INITIALIZATION:
+- supported_languages: List of supported languages
+  ["en", "de", "fr", "es", "it", "nl", "sv", "no", "da", "fi"]
+
+================================================================================
+CORE METHODS
+================================================================================
+
+1. extract_text_from_pdf(pdf_path: Path, method: str = "pdfplumber")
+   PURPOSE: Extract text from PDF using specified method
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   - method: Extraction method ("pdfplumber", "pymupdf", "pdfminer")
+   RETURNS: Extracted text string
+   FUNCTIONALITY:
+   - Tries specified extraction method
+   - Falls back to alternative methods on failure
+   - Handles errors gracefully
+   - Logs extraction attempts and failures
+
+2. _extract_with_pdfplumber(pdf_path: Path)
+   PURPOSE: Extract text using pdfplumber library
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   RETURNS: Extracted text with page markers
+   FUNCTIONALITY:
+   - Opens PDF with pdfplumber
+   - Extracts text from each page
+   - Adds page markers for reference
+   - Handles page extraction errors
+   - Returns formatted text with page separators
+
+3. _extract_with_pymupdf(pdf_path: Path)
+   PURPOSE: Extract text using PyMuPDF (fitz) library
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   RETURNS: Extracted text with page markers
+   FUNCTIONALITY:
+   - Opens PDF with PyMuPDF
+   - Loads each page individually
+   - Extracts text from pages
+   - Adds page markers for reference
+   - Closes document properly
+   - Handles page extraction errors
+
+4. _extract_with_pdfminer(pdf_path: Path)
+   PURPOSE: Extract text using pdfminer library
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   RETURNS: Extracted text
+   FUNCTIONALITY:
+   - Uses pdfminer high-level extraction
+   - Handles extraction errors
+   - Returns raw extracted text
+   - Logs errors for debugging
+
+================================================================================
+TABLE EXTRACTION METHODS
+================================================================================
+
+5. extract_tables_from_pdf(pdf_path: Path)
+   PURPOSE: Extract tables from PDF documents
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   RETURNS: List of table dictionaries
+   FUNCTIONALITY:
+   - Uses pdfplumber for table extraction
+   - Processes each page for tables
+   - Validates table data (minimum 2 rows)
+   - Creates structured table data
+   - Includes page and table numbers
+   - Handles extraction errors gracefully
+
+   TABLE STRUCTURE:
+   {
+       "page": page_number,
+       "table_number": table_index,
+       "data": table_data_array,
+       "rows": number_of_rows,
+       "columns": number_of_columns
+   }
+
+================================================================================
+LANGUAGE DETECTION METHODS
+================================================================================
+
+6. detect_language(text: str)
+   PURPOSE: Detect language of extracted text
+   PARAMETERS:
+   - text: Text to analyze
+   RETURNS: Detected language code or "unknown"
+   FUNCTIONALITY:
+   - Uses langdetect library
+   - Handles detection errors
+   - Returns "unknown" on failure
+   - Supports multiple languages
+
+7. is_language_supported(language: str)
+   PURPOSE: Check if language is supported
+   PARAMETERS:
+   - language: Language code to check
+   RETURNS: Boolean indicating support
+   FUNCTIONALITY:
+   - Checks against supported_languages list
+   - Returns True if supported, False otherwise
+
+================================================================================
+METADATA EXTRACTION METHODS
+================================================================================
+
+8. extract_metadata(pdf_path: Path)
+   PURPOSE: Extract PDF metadata
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   RETURNS: Dictionary with metadata
+   FUNCTIONALITY:
+   - Uses PyMuPDF for metadata extraction
+   - Extracts standard PDF metadata
+   - Handles missing metadata gracefully
+   - Returns structured metadata dictionary
+
+   METADATA STRUCTURE:
+   {
+       "title": document_title,
+       "author": document_author,
+       "subject": document_subject,
+       "creator": document_creator,
+       "producer": document_producer,
+       "creation_date": creation_date,
+       "modification_date": modification_date,
+       "page_count": number_of_pages,
+       "file_size": file_size_bytes
+   }
+
+================================================================================
+MAIN PROCESSING METHOD
+================================================================================
+
+9. process_pdf(pdf_path: Path, target_language: str = "en")
+   PURPOSE: Complete PDF processing pipeline
+   PARAMETERS:
+   - pdf_path: Path to PDF file
+   - target_language: Target language for processing
+   RETURNS: Dictionary with processed data
+   FUNCTIONALITY:
+   - Extracts text using multiple methods
+   - Detects document language
+   - Extracts tables and metadata
+   - Creates comprehensive document structure
+   - Handles processing errors
+   - Returns structured processing results
+
+   PROCESSING RESULT STRUCTURE:
+   {
+       "file_name": original_filename,
+       "language": detected_language,
+       "text_content": extracted_text,
+       "tables": extracted_tables,
+       "metadata": document_metadata,
+       "processing_info": {
+           "processed_at": timestamp,
+           "processing_method": method_used,
+           "confidence_score": extraction_confidence
+       }
+   }
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+ERROR TYPES HANDLED:
+1. FileNotFoundError: PDF file doesn't exist
+2. PermissionError: Insufficient file permissions
+3. ValueError: Invalid extraction method
+4. LangDetectException: Language detection failure
+5. General Exception: Unexpected errors
+
+ERROR HANDLING STRATEGY:
+- Graceful fallback to alternative methods
+- Detailed error logging
+- Continue processing when possible
+- Return partial results on failure
+- Provide meaningful error messages
+
+================================================================================
+EXTRACTION METHODS COMPARISON
+================================================================================
+
+PDFPLUMBER:
+- Best for: Tables, structured data
+- Pros: Excellent table extraction, good text quality
+- Cons: Slower processing, memory intensive
+
+PYMUPDF (FITZ):
+- Best for: Fast text extraction, large files
+- Pros: Fast processing, good text quality, metadata access
+- Cons: Limited table extraction
+
+PDFMINER:
+- Best for: Fallback extraction, simple text
+- Pros: Reliable, lightweight
+- Cons: Basic functionality, limited features
+
+================================================================================
+PERFORMANCE CONSIDERATIONS
+================================================================================
+
+OPTIMIZATION FEATURES:
+- Method fallback for reliability
+- Page-by-page processing for memory efficiency
+- Error handling to prevent crashes
+- Logging for performance monitoring
+
+MEMORY MANAGEMENT:
+- Processes pages individually
+- Closes PDF documents properly
+- Handles large files efficiently
+- Prevents memory leaks
+
+================================================================================
+USAGE EXAMPLES
+================================================================================
+
+1. BASIC TEXT EXTRACTION:
+   processor = SimplePDFProcessor()
+   text = processor.extract_text_from_pdf("document.pdf")
+
+2. TABLE EXTRACTION:
+   tables = processor.extract_tables_from_pdf("document.pdf")
+
+3. COMPLETE PROCESSING:
+   result = processor.process_pdf("document.pdf", "en")
+
+4. LANGUAGE DETECTION:
+   language = processor.detect_language(text)
+
+5. METADATA EXTRACTION:
+   metadata = processor.extract_metadata("document.pdf")
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+REQUIRED PACKAGES:
+- pdfplumber: Primary PDF processing
+- PyMuPDF (fitz): Alternative PDF processing
+- pdfminer.six: Fallback PDF processing
+- langdetect: Language detection
+- loguru: Advanced logging
+
+OPTIONAL PACKAGES:
+- Standard library modules (logging, pathlib, typing, re, json, datetime)
+
+================================================================================

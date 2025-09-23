@@ -1,0 +1,377 @@
+================================================================================
+COMPARISON MODEL SYSTEM - src/ai_standards/models/comparison_model.py
+================================================================================
+
+FILE: src/ai_standards/models/comparison_model.py
+PURPOSE: Standards comparison, similarity analysis, and compliance checking
+LOCATION: src/ai_standards/models/
+DEPENDENCIES:
+- logging: Standard logging
+- pathlib.Path: Path handling
+- typing: Type hints (Dict, List, Optional, Tuple, Any)
+- json: JSON handling
+- numpy: Numerical computing
+- pandas: Data manipulation
+- datetime: Date/time handling
+- dataclasses: Data class decorators
+- torch: PyTorch deep learning framework
+- sentence_transformers: Sentence embedding models
+- sklearn: Machine learning utilities
+- chromadb: Vector database
+- loguru: Advanced logging
+
+================================================================================
+DATA CLASSES
+================================================================================
+
+@dataclass
+CLASS: ComparisonResult
+PURPOSE: Data structure for comparison results
+FIELDS:
+- standard_a: Name of first standard
+- standard_b: Name of second standard
+- similarity_score: Overall similarity score (0-1)
+- category_scores: Dictionary of category-specific scores
+- differences: List of identified differences
+- recommendations: List of recommendations
+- compliance_status: Compliance status string
+
+================================================================================
+CLASS STRUCTURE
+================================================================================
+
+CLASS: StandardsComparisonModel
+PURPOSE: Handles standards comparison and analysis
+INITIALIZATION:
+- embedding_model: Sentence transformer model
+- vector_db: Vector database client
+- collection: ChromaDB collection
+- pdf_processor: PDF processing instance
+
+================================================================================
+INITIALIZATION METHODS
+================================================================================
+
+1. _initialize_models()
+   PURPOSE: Initialize models for comparison
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY:
+   - Tries to load fine-tuned embedding model first
+   - Falls back to base model if fine-tuned not available
+   - Handles model loading errors gracefully
+   - Logs model initialization status
+
+2. _initialize_vector_db()
+   PURPOSE: Initialize vector database connection
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY:
+   - Creates ChromaDB persistent client
+   - Connects to standards_embeddings collection
+   - Handles database connection errors
+   - Logs database connection status
+
+================================================================================
+CORE COMPARISON METHODS
+================================================================================
+
+3. compare_standards(standard_a_path: Path, standard_b_path: Path)
+   PURPOSE: Compare two standards documents
+   PARAMETERS:
+   - standard_a_path: Path to first standard
+   - standard_b_path: Path to second standard
+   RETURNS: ComparisonResult object
+   FUNCTIONALITY:
+   - Processes both standards using PDF processor
+   - Calculates overall similarity score
+   - Computes category-specific scores
+   - Identifies differences between standards
+   - Generates recommendations
+   - Determines compliance status
+   - Returns comprehensive comparison result
+
+4. _calculate_overall_similarity(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Calculate overall similarity between documents
+   PARAMETERS:
+   - doc_a: First document data
+   - doc_b: Second document data
+   RETURNS: Similarity score (0-1)
+   FUNCTIONALITY:
+   - Extracts text content from both documents
+   - Generates embeddings for text chunks
+   - Computes cosine similarity matrix
+   - Calculates weighted average similarity
+   - Returns normalized similarity score
+
+5. _calculate_category_scores(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Calculate category-specific similarity scores
+   PARAMETERS:
+   - doc_a: First document data
+   - doc_b: Second document data
+   RETURNS: Dictionary of category scores
+   FUNCTIONALITY:
+   - Defines comparison categories
+   - Extracts category-specific content
+   - Computes similarity for each category
+   - Applies category weights
+   - Returns category score dictionary
+
+   CATEGORIES:
+   - illuminance: Lighting level requirements
+   - color_rendering: Color rendering specifications
+   - glare_control: Glare control measures
+   - energy_efficiency: Energy efficiency requirements
+   - safety: Safety considerations
+
+================================================================================
+SIMILARITY ANALYSIS METHODS
+================================================================================
+
+6. _extract_category_content(doc: Dict, category: str)
+   PURPOSE: Extract content relevant to specific category
+   PARAMETERS:
+   - doc: Document data
+   - category: Category name
+   RETURNS: List of relevant text chunks
+   FUNCTIONALITY:
+   - Defines category keywords
+   - Searches document content for keywords
+   - Extracts relevant text chunks
+   - Filters and cleans content
+   - Returns category-specific content
+
+7. _compute_text_similarity(text_a: str, text_b: str)
+   PURPOSE: Compute similarity between two text strings
+   PARAMETERS:
+   - text_a: First text string
+   - text_b: Second text string
+   RETURNS: Similarity score (0-1)
+   FUNCTIONALITY:
+   - Generates embeddings for both texts
+   - Computes cosine similarity
+   - Returns normalized similarity score
+
+================================================================================
+DIFFERENCE DETECTION METHODS
+================================================================================
+
+8. _identify_differences(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Identify differences between standards
+   PARAMETERS:
+   - doc_a: First document data
+   - doc_b: Second document data
+   RETURNS: List of difference descriptions
+   FUNCTIONALITY:
+   - Compares parameter values
+   - Identifies missing requirements
+   - Detects conflicting specifications
+   - Analyzes structural differences
+   - Returns detailed difference list
+
+9. _compare_parameters(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Compare specific parameters between standards
+   PARAMETERS:
+   - doc_a: First document data
+   - doc_b: Second document data
+   RETURNS: List of parameter differences
+   FUNCTIONALITY:
+   - Extracts parameter values
+   - Compares numerical values
+   - Identifies value differences
+   - Calculates percentage differences
+   - Returns parameter comparison results
+
+================================================================================
+RECOMMENDATION GENERATION
+================================================================================
+
+10. _generate_recommendations(similarity_score: float, category_scores: Dict, differences: List)
+    PURPOSE: Generate recommendations based on comparison
+    PARAMETERS:
+    - similarity_score: Overall similarity score
+    - category_scores: Category-specific scores
+    - differences: List of differences
+    RETURNS: List of recommendations
+    FUNCTIONALITY:
+    - Analyzes similarity scores
+    - Identifies improvement areas
+    - Generates specific recommendations
+    - Prioritizes recommendations
+    - Returns actionable advice list
+
+11. _determine_compliance_status(similarity_score: float, category_scores: Dict)
+    PURPOSE: Determine overall compliance status
+    PARAMETERS:
+    - similarity_score: Overall similarity score
+    - category_scores: Category-specific scores
+    RETURNS: Compliance status string
+    FUNCTIONALITY:
+    - Evaluates similarity thresholds
+    - Analyzes category compliance
+    - Determines overall status
+    - Returns compliance classification
+
+    COMPLIANCE STATUSES:
+    - "Fully Compliant": High similarity across all categories
+    - "Mostly Compliant": High similarity with minor differences
+    - "Partially Compliant": Moderate similarity with some differences
+    - "Non-Compliant": Low similarity with significant differences
+
+================================================================================
+SEARCH AND RETRIEVAL METHODS
+================================================================================
+
+12. search_standards(query: str, top_k: int = 5)
+    PURPOSE: Search for similar standards
+    PARAMETERS:
+    - query: Search query string
+    - top_k: Number of results to return
+    RETURNS: List of (document, score) tuples
+    FUNCTIONALITY:
+    - Generates query embedding
+    - Searches vector database
+    - Retrieves similar documents
+    - Ranks results by similarity
+    - Returns top-k results
+
+13. get_similar_standards(standard_path: Path, top_k: int = 5)
+    PURPOSE: Find standards similar to given standard
+    PARAMETERS:
+    - standard_path: Path to reference standard
+    - top_k: Number of similar standards to return
+    RETURNS: List of (document, score) tuples
+    FUNCTIONALITY:
+    - Processes reference standard
+    - Generates document embedding
+    - Searches for similar documents
+    - Returns ranked similar standards
+
+================================================================================
+ANALYSIS AND REPORTING METHODS
+================================================================================
+
+14. analyze_standard_compliance(standard_path: Path, reference_standard: str)
+    PURPOSE: Analyze compliance of standard against reference
+    PARAMETERS:
+    - standard_path: Path to standard to analyze
+    - reference_standard: Reference standard name
+    RETURNS: Compliance analysis results
+    FUNCTIONALITY:
+    - Loads reference standard
+    - Compares with target standard
+    - Generates compliance report
+    - Identifies compliance gaps
+    - Returns detailed analysis
+
+15. generate_comparison_report(comparison_result: ComparisonResult)
+    PURPOSE: Generate detailed comparison report
+    PARAMETERS:
+    - comparison_result: Comparison result object
+    RETURNS: Formatted report string
+    FUNCTIONALITY:
+    - Formats comparison data
+    - Creates structured report
+    - Includes visualizations
+    - Generates recommendations
+    - Returns comprehensive report
+
+================================================================================
+CLUSTERING AND CATEGORIZATION
+================================================================================
+
+16. cluster_standards(standards_paths: List[Path], n_clusters: int = 5)
+    PURPOSE: Cluster standards by similarity
+    PARAMETERS:
+    - standards_paths: List of standard file paths
+    - n_clusters: Number of clusters
+    RETURNS: Clustering results
+    FUNCTIONALITY:
+    - Processes all standards
+    - Generates embeddings
+    - Applies K-means clustering
+    - Assigns cluster labels
+    - Returns clustering results
+
+17. categorize_standards(standards_paths: List[Path])
+    PURPOSE: Categorize standards by type
+    PARAMETERS:
+    - standards_paths: List of standard file paths
+    RETURNS: Categorization results
+    FUNCTIONALITY:
+    - Analyzes standard content
+    - Identifies standard types
+    - Groups similar standards
+    - Returns categorization results
+
+================================================================================
+PERFORMANCE OPTIMIZATION
+================================================================================
+
+OPTIMIZATION FEATURES:
+- Batch processing for multiple comparisons
+- Caching of embeddings and results
+- Efficient similarity computation
+- Memory management for large datasets
+- Parallel processing where possible
+
+MEMORY MANAGEMENT:
+- Processes documents in chunks
+- Clears intermediate results
+- Uses efficient data structures
+- Implements garbage collection
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+ERROR TYPES HANDLED:
+1. File processing errors
+2. Model loading failures
+3. Database connection issues
+4. Similarity computation errors
+5. Memory allocation errors
+
+ERROR HANDLING STRATEGY:
+- Graceful fallback mechanisms
+- Detailed error logging
+- Partial result recovery
+- User-friendly error messages
+- Robust error recovery
+
+================================================================================
+USAGE EXAMPLES
+================================================================================
+
+1. BASIC COMPARISON:
+   model = StandardsComparisonModel()
+   result = model.compare_standards("standard1.pdf", "standard2.pdf")
+
+2. STANDARDS SEARCH:
+   results = model.search_standards("illuminance requirements", top_k=5)
+
+3. SIMILAR STANDARDS:
+   similar = model.get_similar_standards("reference.pdf", top_k=3)
+
+4. COMPLIANCE ANALYSIS:
+   analysis = model.analyze_standard_compliance("test.pdf", "EN12464")
+
+5. STANDARDS CLUSTERING:
+   clusters = model.cluster_standards(standards_list, n_clusters=5)
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+REQUIRED PACKAGES:
+- torch: PyTorch deep learning framework
+- sentence_transformers: Sentence embedding models
+- sklearn: Machine learning utilities
+- chromadb: Vector database
+- numpy: Numerical computing
+- pandas: Data manipulation
+
+OPTIONAL PACKAGES:
+- Standard library modules (logging, pathlib, typing, json, datetime, dataclasses)
+
+================================================================================

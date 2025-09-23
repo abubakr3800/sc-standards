@@ -1,0 +1,324 @@
+================================================================================
+AI TRAINING SYSTEM - src/ai_standards/models/ai_trainer.py
+================================================================================
+
+FILE: src/ai_standards/models/ai_trainer.py
+PURPOSE: AI model training, fine-tuning, and embedding generation
+LOCATION: src/ai_standards/models/
+DEPENDENCIES:
+- logging: Standard logging
+- pathlib.Path: Path handling
+- typing: Type hints (Dict, List, Optional, Tuple, Any)
+- json: JSON handling
+- pickle: Object serialization
+- datetime: Date/time handling
+- torch: PyTorch deep learning framework
+- numpy: Numerical computing
+- pandas: Data manipulation
+- transformers: Hugging Face transformers
+- sentence_transformers: Sentence embedding models
+- sklearn: Machine learning utilities
+- chromadb: Vector database
+- loguru: Advanced logging
+
+================================================================================
+CLASS STRUCTURE
+================================================================================
+
+CLASS: AIStandardsTrainer
+PURPOSE: Handles AI model training for standards understanding
+INITIALIZATION:
+- device: PyTorch device (CUDA if available, else CPU)
+- embedding_model: Sentence transformer model
+- classification_model: Classification model
+- tokenizer: Text tokenizer
+- vector_db: Vector database client
+- pdf_processor: PDF processing instance
+
+================================================================================
+INITIALIZATION METHODS
+================================================================================
+
+1. _initialize_models()
+   PURPOSE: Initialize AI models
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY:
+   - Loads embedding model from config
+   - Initializes sentence transformer
+   - Loads classification model and tokenizer
+   - Sets up model for sequence classification
+   - Configures number of labels (10 standard categories)
+   - Logs model loading status
+
+2. _initialize_vector_db()
+   PURPOSE: Initialize vector database for embeddings
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY:
+   - Creates ChromaDB persistent client
+   - Sets up vector database path
+   - Creates or gets standards_embeddings collection
+   - Handles database initialization errors
+   - Logs database status
+
+================================================================================
+TRAINING DATA CREATION
+================================================================================
+
+3. create_training_data(processed_documents: List[Dict[str, Any]])
+   PURPOSE: Create training data from processed documents
+   PARAMETERS:
+   - processed_documents: List of processed PDF documents
+   RETURNS: Dictionary with training data
+   FUNCTIONALITY:
+   - Processes document chunks
+   - Creates embeddings for each chunk
+   - Generates labels for classification
+   - Extracts metadata
+   - Structures data for training
+   - Returns organized training dataset
+
+   TRAINING DATA STRUCTURE:
+   {
+       "texts": [list of text chunks],
+       "labels": [list of labels],
+       "embeddings": [list of embeddings],
+       "metadata": [list of metadata]
+   }
+
+================================================================================
+EMBEDDING GENERATION
+================================================================================
+
+4. generate_embeddings(texts: List[str])
+   PURPOSE: Generate embeddings for text data
+   PARAMETERS:
+   - texts: List of text strings
+   RETURNS: Numpy array of embeddings
+   FUNCTIONALITY:
+   - Uses sentence transformer model
+   - Processes texts in batches
+   - Generates high-dimensional embeddings
+   - Returns normalized embeddings
+   - Handles batch processing for efficiency
+
+5. store_embeddings_in_db(embeddings: np.ndarray, texts: List[str], metadata: List[Dict])
+   PURPOSE: Store embeddings in vector database
+   PARAMETERS:
+   - embeddings: Numpy array of embeddings
+   - texts: List of corresponding texts
+   - metadata: List of metadata dictionaries
+   RETURNS: None
+   FUNCTIONALITY:
+   - Converts embeddings to list format
+   - Creates unique IDs for each embedding
+   - Stores in ChromaDB collection
+   - Associates with text and metadata
+   - Handles database storage errors
+
+================================================================================
+MODEL TRAINING
+================================================================================
+
+6. train_classification_model(training_data: Dict[str, List])
+   PURPOSE: Train classification model
+   PARAMETERS:
+   - training_data: Training data dictionary
+   RETURNS: Training results dictionary
+   FUNCTIONALITY:
+   - Splits data into train/validation sets
+   - Creates PyTorch datasets
+   - Sets up training arguments
+   - Configures data collator
+   - Trains model with Hugging Face Trainer
+   - Evaluates model performance
+   - Returns training metrics
+
+   TRAINING ARGUMENTS:
+   - output_dir: Model output directory
+   - num_train_epochs: Number of training epochs
+   - per_device_train_batch_size: Batch size
+   - per_device_eval_batch_size: Evaluation batch size
+   - warmup_steps: Warmup steps
+   - weight_decay: Weight decay
+   - logging_dir: Logging directory
+   - logging_steps: Logging frequency
+   - evaluation_strategy: Evaluation strategy
+   - save_strategy: Model saving strategy
+
+7. fine_tune_embedding_model(training_data: Dict[str, List])
+   PURPOSE: Fine-tune embedding model
+   PARAMETERS:
+   - training_data: Training data dictionary
+   RETURNS: Fine-tuning results
+   FUNCTIONALITY:
+   - Creates input examples for training
+   - Sets up contrastive loss
+   - Configures training parameters
+   - Fine-tunes sentence transformer
+   - Evaluates embedding quality
+   - Returns fine-tuning metrics
+
+================================================================================
+MODEL EVALUATION
+================================================================================
+
+8. evaluate_model(model, test_data: Dict[str, List])
+   PURPOSE: Evaluate trained model
+   PARAMETERS:
+   - model: Trained model
+   - test_data: Test dataset
+   RETURNS: Evaluation metrics
+   FUNCTIONALITY:
+   - Generates predictions
+   - Calculates accuracy score
+   - Creates classification report
+   - Computes precision, recall, F1-score
+   - Returns detailed evaluation metrics
+
+9. compute_similarity_metrics(embeddings: np.ndarray, labels: List)
+   PURPOSE: Compute similarity metrics for embeddings
+   PARAMETERS:
+   - embeddings: Embedding vectors
+   - labels: Corresponding labels
+   RETURNS: Similarity metrics
+   FUNCTIONALITY:
+   - Computes cosine similarity matrix
+   - Calculates intra-class similarity
+   - Calculates inter-class similarity
+   - Measures embedding quality
+   - Returns similarity statistics
+
+================================================================================
+MODEL PERSISTENCE
+================================================================================
+
+10. save_models(output_dir: Path)
+    PURPOSE: Save trained models
+    PARAMETERS:
+    - output_dir: Directory to save models
+    RETURNS: None
+    FUNCTIONALITY:
+    - Creates output directory
+    - Saves embedding model
+    - Saves classification model
+    - Saves tokenizer
+    - Saves training configuration
+    - Logs save status
+
+11. load_models(model_dir: Path)
+    PURPOSE: Load pre-trained models
+    PARAMETERS:
+    - model_dir: Directory containing models
+    RETURNS: None
+    FUNCTIONALITY:
+    - Loads embedding model
+    - Loads classification model
+    - Loads tokenizer
+    - Loads configuration
+    - Updates model state
+    - Logs load status
+
+================================================================================
+TRAINING PIPELINE
+================================================================================
+
+12. train_from_processed_data(processed_documents: List[Dict[str, Any]])
+    PURPOSE: Complete training pipeline
+    PARAMETERS:
+    - processed_documents: List of processed documents
+    RETURNS: Training results
+    FUNCTIONALITY:
+    - Creates training data
+    - Generates embeddings
+    - Stores embeddings in database
+    - Trains classification model
+    - Fine-tunes embedding model
+    - Evaluates models
+    - Saves trained models
+    - Returns comprehensive results
+
+    TRAINING PIPELINE STEPS:
+    1. Data preparation and chunking
+    2. Embedding generation
+    3. Vector database storage
+    4. Classification model training
+    5. Embedding model fine-tuning
+    6. Model evaluation
+    7. Model persistence
+    8. Results reporting
+
+================================================================================
+PERFORMANCE OPTIMIZATION
+================================================================================
+
+OPTIMIZATION FEATURES:
+- GPU acceleration when available
+- Batch processing for efficiency
+- Memory management for large datasets
+- Parallel processing where possible
+- Model caching and persistence
+
+MEMORY MANAGEMENT:
+- Processes data in batches
+- Clears GPU memory when needed
+- Uses efficient data structures
+- Implements garbage collection
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+ERROR TYPES HANDLED:
+1. CUDA/GPU errors
+2. Model loading failures
+3. Training data errors
+4. Database connection issues
+5. Memory allocation errors
+6. File I/O errors
+
+ERROR HANDLING STRATEGY:
+- Graceful fallback to CPU
+- Detailed error logging
+- Partial result recovery
+- Model state preservation
+- User-friendly error messages
+
+================================================================================
+USAGE EXAMPLES
+================================================================================
+
+1. BASIC TRAINING:
+   trainer = AIStandardsTrainer()
+   results = trainer.train_from_processed_data(processed_docs)
+
+2. EMBEDDING GENERATION:
+   embeddings = trainer.generate_embeddings(texts)
+
+3. MODEL EVALUATION:
+   metrics = trainer.evaluate_model(model, test_data)
+
+4. MODEL PERSISTENCE:
+   trainer.save_models(Path("models/"))
+
+5. MODEL LOADING:
+   trainer.load_models(Path("models/"))
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+REQUIRED PACKAGES:
+- torch: PyTorch deep learning framework
+- transformers: Hugging Face transformers
+- sentence_transformers: Sentence embedding models
+- sklearn: Machine learning utilities
+- chromadb: Vector database
+- numpy: Numerical computing
+- pandas: Data manipulation
+
+OPTIONAL PACKAGES:
+- Standard library modules (logging, pathlib, typing, json, pickle, datetime)
+
+================================================================================

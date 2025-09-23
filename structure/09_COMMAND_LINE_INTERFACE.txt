@@ -1,0 +1,493 @@
+================================================================================
+COMMAND LINE INTERFACE - Available Commands and Functions
+================================================================================
+
+PURPOSE: Command-line interface for all system operations
+ENTRY POINT: main.py
+USAGE: python main.py [command] [options]
+
+================================================================================
+AVAILABLE COMMANDS
+================================================================================
+
+1. PROCESS COMMAND
+   USAGE: python main.py process [options]
+   PURPOSE: Process PDFs in base/ folder
+   OPTIONS:
+   - --input-dir DIR: Input directory (default: base/)
+   - --target-language LANG: Target language (default: en)
+   
+   FUNCTIONALITY:
+   - Processes all PDF files in specified directory
+   - Extracts text and tables
+   - Detects language
+   - Saves processed data to uploads/
+   - Returns processing summary
+
+2. TRAIN COMMAND
+   USAGE: python main.py train
+   PURPOSE: Train AI models from processed data
+   OPTIONS: None
+   
+   FUNCTIONALITY:
+   - Loads processed documents from uploads/
+   - Creates training data
+   - Trains embedding model
+   - Trains classification model
+   - Saves trained models
+   - Returns training results
+
+3. COMPARE COMMAND
+   USAGE: python main.py compare --standard-a FILE1 --standard-b FILE2
+   PURPOSE: Compare two standards
+   OPTIONS:
+   - --standard-a FILE: First standard file (required)
+   - --standard-b FILE: Second standard file (required)
+   
+   FUNCTIONALITY:
+   - Processes both standards
+   - Calculates similarity scores
+   - Identifies differences
+   - Generates recommendations
+   - Returns comparison results
+
+4. WEB COMMAND
+   USAGE: python main.py web [options]
+   PURPOSE: Start Streamlit web interface
+   OPTIONS:
+   - --host HOST: Host address (default: localhost)
+   - --port PORT: Port number (default: 8501)
+   
+   FUNCTIONALITY:
+   - Starts Streamlit web server
+   - Launches web interface
+   - Provides interactive UI
+   - Handles user interactions
+
+5. API COMMAND
+   USAGE: python main.py api [options]
+   PURPOSE: Start FastAPI server
+   OPTIONS:
+   - --host HOST: Host address (default: localhost)
+   - --port PORT: Port number (default: 8000)
+   
+   FUNCTIONALITY:
+   - Starts FastAPI server
+   - Provides REST API endpoints
+   - Handles API requests
+   - Returns JSON responses
+
+6. DEMO COMMAND
+   USAGE: python main.py demo
+   PURPOSE: Run complete demo
+   OPTIONS: None
+   
+   FUNCTIONALITY:
+   - Processes sample PDFs
+   - Trains models
+   - Performs comparisons
+   - Demonstrates capabilities
+   - Shows results
+
+7. DIALUX COMMAND
+   USAGE: python main.py dialux --file FILE
+   PURPOSE: Process Dialux PDF report
+   OPTIONS:
+   - --file FILE: Path to Dialux PDF file (required)
+   
+   FUNCTIONALITY:
+   - Processes Dialux report
+   - Extracts lighting data
+   - Evaluates compliance
+   - Generates recommendations
+   - Returns evaluation results
+
+================================================================================
+MAKEFILE COMMANDS
+================================================================================
+
+FILE: Makefile
+PURPOSE: Convenient build and run commands
+
+SETUP COMMANDS:
+- make setup: Setup environment and create .env file
+- make install: Install all dependencies
+- make git-setup: Setup Git repository
+- make fix-deps: Fix dependency conflicts
+- make resolve-deps: Resolve dependencies
+
+PROCESSING COMMANDS:
+- make process: Process PDFs in base/ folder
+- make auto-process: Automated processing
+- make train: Train AI models
+- make compare: Compare two standards
+- make demo: Run complete demo
+
+RUN COMMANDS:
+- make run-api: Start FastAPI server
+- make run-web: Start Streamlit web interface
+
+TESTING COMMANDS:
+- make test: Run installation test
+- make test-extract: Test PDF extraction
+- make evaluate: Evaluate lighting reports
+- make demo-evaluation: Demo lighting evaluation
+
+DOCKER COMMANDS:
+- make docker-build: Build Docker image
+- make docker-run: Run with Docker Compose
+
+HELP COMMAND:
+- make help: Show all available commands
+
+================================================================================
+EVALUATION COMMANDS
+================================================================================
+
+1. SIMPLE LIGHTING EVALUATOR
+   USAGE: python simple_lighting_evaluator.py
+   PURPOSE: Interactive lighting parameter evaluation
+   FUNCTIONALITY:
+   - Interactive parameter input
+   - Compliance checking
+   - Solution suggestions
+   - User-friendly interface
+
+2. REALISTIC LIGHTING EVALUATOR
+   USAGE: python realistic_lighting_evaluator.py
+   PURPOSE: Realistic lighting evaluation
+   FUNCTIONALITY:
+   - More realistic criteria
+   - Better accuracy
+   - Comprehensive analysis
+   - Practical recommendations
+
+3. BATCH PDF EVALUATOR
+   USAGE: python batch_pdf_evaluator.py
+   PURPOSE: Batch evaluation of PDF reports
+   FUNCTIONALITY:
+   - Process multiple PDFs
+   - Batch compliance checking
+   - Summary reporting
+   - Efficiency optimization
+
+4. QUICK BATCH EVALUATOR
+   USAGE: python quick_batch_evaluator.py "folder_path"
+   PURPOSE: Quick command-line batch evaluation
+   FUNCTIONALITY:
+   - Fast batch processing
+   - Command-line interface
+   - Minimal dependencies
+   - Quick results
+
+5. QUICK REALISTIC EVALUATOR
+   USAGE: python quick_realistic_evaluator.py "folder_path"
+   PURPOSE: Quick realistic evaluation
+   FUNCTIONALITY:
+   - Fast realistic evaluation
+   - Command-line interface
+   - Optimized for speed
+   - Practical results
+
+================================================================================
+DEMO COMMANDS
+================================================================================
+
+1. DEMO LIGHTING EVALUATION
+   USAGE: python demo_lighting_evaluation.py
+   PURPOSE: Demonstrate lighting evaluation system
+   FUNCTIONALITY:
+   - Example evaluations
+   - Showcase capabilities
+   - Educational examples
+   - System demonstration
+
+2. DEMO SIMPLE EVALUATOR
+   USAGE: python demo_simple_evaluator.py
+   PURPOSE: Simple evaluator demonstration
+   FUNCTIONALITY:
+   - Basic evaluation demo
+   - Simple examples
+   - User guidance
+   - Learning tool
+
+3. DEMO USAGE
+   USAGE: python demo_usage.py
+   PURPOSE: General system demonstration
+   FUNCTIONALITY:
+   - System overview
+   - Feature demonstration
+   - Usage examples
+   - Getting started guide
+
+================================================================================
+TESTING COMMANDS
+================================================================================
+
+1. TEST SYSTEM
+   USAGE: python test_system.py
+   PURPOSE: Test system functionality
+   FUNCTIONALITY:
+   - System health check
+   - Component testing
+   - Integration testing
+   - Performance testing
+
+2. TEST BATCH ANALYZER
+   USAGE: python test_batch_analyzer.py
+   PURPOSE: Test batch analyzer functionality
+   FUNCTIONALITY:
+   - Import testing
+   - Basic functionality
+   - Error handling
+   - Performance testing
+
+3. TEST CHAT API
+   USAGE: python test_chat_api.py
+   PURPOSE: Test chat API functionality
+   FUNCTIONALITY:
+   - API endpoint testing
+   - Response validation
+   - Error handling
+   - Performance testing
+
+4. TEST DIALUX PROCESSOR
+   USAGE: python test_dialux_processor.py
+   PURPOSE: Test Dialux processor
+   FUNCTIONALITY:
+   - PDF processing testing
+   - Data extraction testing
+   - Error handling
+   - Performance testing
+
+5. SIMPLE TEST
+   USAGE: python simple_test.py
+   PURPOSE: Simple system test
+   FUNCTIONALITY:
+   - Basic functionality test
+   - Quick validation
+   - Error checking
+   - Status reporting
+
+6. ACCURACY TEST
+   USAGE: python accuracy_test.py
+   PURPOSE: Test system accuracy
+   FUNCTIONALITY:
+   - Accuracy measurement
+   - Performance evaluation
+   - Benchmark testing
+   - Results reporting
+
+================================================================================
+UTILITY COMMANDS
+================================================================================
+
+1. ORGANIZE FILES
+   USAGE: python organize_files.py [--live]
+   PURPOSE: Organize project files
+   OPTIONS:
+   - --live: Actually move files (default is dry run)
+   
+   FUNCTIONALITY:
+   - Creates directory structure
+   - Moves files to appropriate locations
+   - Cleans up temporary files
+   - Generates organization report
+
+2. QUICK ORGANIZE
+   USAGE: python quick_organize.py
+   PURPOSE: Quick file organization
+   FUNCTIONALITY:
+   - Simple file organization
+   - Creates key directories
+   - Moves important files
+   - Cleans up temporary files
+
+3. IMPROVE ACCURACY
+   USAGE: python improve_accuracy.py
+   PURPOSE: Improve system accuracy
+   FUNCTIONALITY:
+   - Adds comprehensive standards data
+   - Improves data extraction
+   - Installs required dependencies
+   - Tests enhanced system
+
+4. RUN ACCURACY IMPROVEMENTS
+   USAGE: python run_accuracy_improvements.py
+   PURPOSE: Run accuracy improvements
+   FUNCTIONALITY:
+   - Executes accuracy improvement script
+   - Provides feedback
+   - Handles errors
+   - Reports results
+
+================================================================================
+PROCESSING COMMANDS
+================================================================================
+
+1. PROCESS PDFS
+   USAGE: python process_pdfs.py
+   PURPOSE: Process PDF files
+   FUNCTIONALITY:
+   - Batch PDF processing
+   - Text extraction
+   - Table extraction
+   - Language detection
+
+2. PROCESS STANDARDS
+   USAGE: python process_standards.py
+   PURPOSE: Process standards documents
+   FUNCTIONALITY:
+   - Standards-specific processing
+   - Parameter extraction
+   - Compliance checking
+   - Results generation
+
+3. IMPROVE STANDARDS EXTRACTION
+   USAGE: python improve_standards_extraction.py
+   PURPOSE: Improve standards data extraction
+   FUNCTIONALITY:
+   - Enhanced extraction patterns
+   - Better data quality
+   - Improved accuracy
+   - Comprehensive extraction
+
+4. ADD MORE STANDARDS DATA
+   USAGE: python add_more_standards_data.py
+   PURPOSE: Add comprehensive standards data
+   FUNCTIONALITY:
+   - Adds EN 12464-1:2021 data
+   - Adds BREEAM requirements
+   - Adds ISO 8995-1:2013 data
+   - Creates enhanced database
+
+================================================================================
+DEBUG COMMANDS
+================================================================================
+
+1. DEBUG DETAILED
+   USAGE: python debug_detailed.py
+   PURPOSE: Detailed debugging
+   FUNCTIONALITY:
+   - Comprehensive debugging
+   - Error analysis
+   - Performance profiling
+   - System diagnostics
+
+2. DEBUG PROCESSING
+   USAGE: python debug_processing.py
+   PURPOSE: Debug processing issues
+   FUNCTIONALITY:
+   - Processing debugging
+   - Error identification
+   - Performance analysis
+   - Issue resolution
+
+================================================================================
+COMMAND LINE OPTIONS
+================================================================================
+
+GLOBAL OPTIONS:
+- --help, -h: Show help message
+- --version: Show version information
+- --verbose, -v: Verbose output
+- --quiet, -q: Quiet output
+- --config FILE: Use custom config file
+
+PROCESSING OPTIONS:
+- --input-dir DIR: Input directory
+- --output-dir DIR: Output directory
+- --target-language LANG: Target language
+- --max-pages N: Maximum pages to process
+- --chunk-size N: Text chunk size
+
+TRAINING OPTIONS:
+- --epochs N: Number of training epochs
+- --batch-size N: Training batch size
+- --learning-rate FLOAT: Learning rate
+- --model-name STR: Model name
+
+API OPTIONS:
+- --host HOST: Host address
+- --port PORT: Port number
+- --workers N: Number of workers
+- --reload: Auto-reload on changes
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+ERROR TYPES:
+1. Command not found
+2. Invalid options
+3. File not found
+4. Permission denied
+5. Processing errors
+6. Network errors
+
+ERROR RESPONSES:
+- Clear error messages
+- Usage instructions
+- Troubleshooting tips
+- Exit codes
+- Logging
+
+================================================================================
+EXIT CODES
+================================================================================
+
+EXIT CODES:
+- 0: Success
+- 1: General error
+- 2: Invalid command
+- 3: File not found
+- 4: Permission denied
+- 5: Processing error
+- 6: Network error
+
+================================================================================
+USAGE EXAMPLES
+================================================================================
+
+1. PROCESS PDFS:
+   python main.py process --input-dir base/ --target-language en
+
+2. TRAIN MODELS:
+   python main.py train
+
+3. COMPARE STANDARDS:
+   python main.py compare --standard-a "EN12464.pdf" --standard-b "BREEAM.pdf"
+
+4. START WEB INTERFACE:
+   python main.py web --port 8501
+
+5. START API SERVER:
+   python main.py api --port 8000
+
+6. EVALUATE LIGHTING:
+   python simple_lighting_evaluator.py
+
+7. BATCH EVALUATION:
+   python quick_batch_evaluator.py "reports_folder"
+
+8. ORGANIZE FILES:
+   python organize_files.py --live
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+REQUIRED PACKAGES:
+- argparse: Command-line argument parsing
+- pathlib: Path handling
+- loguru: Advanced logging
+- sys: System-specific parameters
+
+CUSTOM DEPENDENCIES:
+- ai_standards.core.config: Configuration
+- ai_standards.core.simple_pdf_processor: PDF processing
+- ai_standards.models.ai_trainer: AI training
+- ai_standards.models.comparison_model: Comparison
+- ai_standards.web.web_interface: Web interface
+
+================================================================================

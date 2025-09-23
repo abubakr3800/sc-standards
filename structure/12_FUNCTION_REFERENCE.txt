@@ -1,0 +1,662 @@
+================================================================================
+FUNCTION REFERENCE - Complete List of All Functions
+================================================================================
+
+PURPOSE: Comprehensive reference of all functions in the project
+SCOPE: All modules, classes, and functions
+
+================================================================================
+MAIN ENTRY POINT FUNCTIONS (main.py)
+================================================================================
+
+1. setup_logging()
+   PURPOSE: Configure logging system
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Sets up console and file logging
+
+2. process_pdfs_from_directory(pdf_directory: Path, target_language: str = "en")
+   PURPOSE: Process all PDFs in a directory
+   PARAMETERS: pdf_directory, target_language
+   RETURNS: List of processed documents
+   FUNCTIONALITY: Batch PDF processing
+
+3. train_models_from_processed_data()
+   PURPOSE: Train AI models from processed data
+   PARAMETERS: None
+   RETURNS: Training results
+   FUNCTIONALITY: Complete training pipeline
+
+4. compare_standards_cli(standard_a: Path, standard_b: Path)
+   PURPOSE: Compare two standards via CLI
+   PARAMETERS: standard_a, standard_b
+   RETURNS: Comparison results
+   FUNCTIONALITY: Standards comparison
+
+5. main()
+   PURPOSE: Main function handling CLI
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Command-line interface
+
+================================================================================
+CONFIGURATION FUNCTIONS (config.py)
+================================================================================
+
+CLASS: Config
+PURPOSE: Configuration management
+METHODS: None (data class with properties)
+
+PROPERTIES:
+- BASE_DIR: Project root directory
+- DATA_DIR: Data storage directory
+- MODELS_DIR: Models storage directory
+- UPLOADS_DIR: Uploads directory
+- OUTPUTS_DIR: Outputs directory
+- BASE_PDFS_DIR: Base PDFs directory
+- PDF_PROCESSING: PDF processing settings
+- AI_MODELS: AI model settings
+- DATABASE: Database settings
+- COMPARISON: Comparison settings
+- API: API settings
+- LOGGING: Logging settings
+
+================================================================================
+PDF PROCESSING FUNCTIONS (simple_pdf_processor.py)
+================================================================================
+
+CLASS: SimplePDFProcessor
+PURPOSE: PDF processing without complex dependencies
+
+1. __init__()
+   PURPOSE: Initialize processor
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Set up supported languages
+
+2. extract_text_from_pdf(pdf_path: Path, method: str = "pdfplumber")
+   PURPOSE: Extract text from PDF
+   PARAMETERS: pdf_path, method
+   RETURNS: Extracted text
+   FUNCTIONALITY: Multi-method text extraction
+
+3. _extract_with_pdfplumber(pdf_path: Path)
+   PURPOSE: Extract text using pdfplumber
+   PARAMETERS: pdf_path
+   RETURNS: Extracted text
+   FUNCTIONALITY: pdfplumber text extraction
+
+4. _extract_with_pymupdf(pdf_path: Path)
+   PURPOSE: Extract text using PyMuPDF
+   PARAMETERS: pdf_path
+   RETURNS: Extracted text
+   FUNCTIONALITY: PyMuPDF text extraction
+
+5. _extract_with_pdfminer(pdf_path: Path)
+   PURPOSE: Extract text using pdfminer
+   PARAMETERS: pdf_path
+   RETURNS: Extracted text
+   FUNCTIONALITY: pdfminer text extraction
+
+6. extract_tables_from_pdf(pdf_path: Path)
+   PURPOSE: Extract tables from PDF
+   PARAMETERS: pdf_path
+   RETURNS: List of tables
+   FUNCTIONALITY: Table extraction
+
+7. detect_language(text: str)
+   PURPOSE: Detect text language
+   PARAMETERS: text
+   RETURNS: Language code
+   FUNCTIONALITY: Language detection
+
+8. is_language_supported(language: str)
+   PURPOSE: Check language support
+   PARAMETERS: language
+   RETURNS: Boolean
+   FUNCTIONALITY: Language validation
+
+9. extract_metadata(pdf_path: Path)
+   PURPOSE: Extract PDF metadata
+   PARAMETERS: pdf_path
+   RETURNS: Metadata dictionary
+   FUNCTIONALITY: Metadata extraction
+
+10. process_pdf(pdf_path: Path, target_language: str = "en")
+    PURPOSE: Complete PDF processing
+    PARAMETERS: pdf_path, target_language
+    RETURNS: Processed document
+    FUNCTIONALITY: Full processing pipeline
+
+================================================================================
+AI TRAINING FUNCTIONS (ai_trainer.py)
+================================================================================
+
+CLASS: AIStandardsTrainer
+PURPOSE: AI model training and management
+
+1. __init__()
+   PURPOSE: Initialize trainer
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Set up models and database
+
+2. _initialize_models()
+   PURPOSE: Initialize AI models
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Load embedding and classification models
+
+3. _initialize_vector_db()
+   PURPOSE: Initialize vector database
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Set up ChromaDB connection
+
+4. create_training_data(processed_documents: List[Dict[str, Any]])
+   PURPOSE: Create training data
+   PARAMETERS: processed_documents
+   RETURNS: Training data dictionary
+   FUNCTIONALITY: Prepare training data
+
+5. generate_embeddings(texts: List[str])
+   PURPOSE: Generate text embeddings
+   PARAMETERS: texts
+   RETURNS: Embeddings array
+   FUNCTIONALITY: Create sentence embeddings
+
+6. store_embeddings_in_db(embeddings: np.ndarray, texts: List[str], metadata: List[Dict])
+   PURPOSE: Store embeddings in database
+   PARAMETERS: embeddings, texts, metadata
+   RETURNS: None
+   FUNCTIONALITY: Database storage
+
+7. train_classification_model(training_data: Dict[str, List])
+   PURPOSE: Train classification model
+   PARAMETERS: training_data
+   RETURNS: Training results
+   FUNCTIONALITY: Model training
+
+8. fine_tune_embedding_model(training_data: Dict[str, List])
+   PURPOSE: Fine-tune embedding model
+   PARAMETERS: training_data
+   RETURNS: Fine-tuning results
+   FUNCTIONALITY: Model fine-tuning
+
+9. evaluate_model(model, test_data: Dict[str, List])
+   PURPOSE: Evaluate trained model
+   PARAMETERS: model, test_data
+   RETURNS: Evaluation metrics
+   FUNCTIONALITY: Model evaluation
+
+10. compute_similarity_metrics(embeddings: np.ndarray, labels: List)
+    PURPOSE: Compute similarity metrics
+    PARAMETERS: embeddings, labels
+    RETURNS: Similarity metrics
+    FUNCTIONALITY: Embedding quality assessment
+
+11. save_models(output_dir: Path)
+    PURPOSE: Save trained models
+    PARAMETERS: output_dir
+    RETURNS: None
+    FUNCTIONALITY: Model persistence
+
+12. load_models(model_dir: Path)
+    PURPOSE: Load pre-trained models
+    PARAMETERS: model_dir
+    RETURNS: None
+    FUNCTIONALITY: Model loading
+
+13. train_from_processed_data(processed_documents: List[Dict[str, Any]])
+    PURPOSE: Complete training pipeline
+    PARAMETERS: processed_documents
+    RETURNS: Training results
+    FUNCTIONALITY: End-to-end training
+
+================================================================================
+COMPARISON MODEL FUNCTIONS (comparison_model.py)
+================================================================================
+
+CLASS: StandardsComparisonModel
+PURPOSE: Standards comparison and analysis
+
+1. __init__()
+   PURPOSE: Initialize comparison model
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Set up models and database
+
+2. _initialize_models()
+   PURPOSE: Initialize comparison models
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Load embedding model
+
+3. _initialize_vector_db()
+   PURPOSE: Initialize vector database
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Set up database connection
+
+4. compare_standards(standard_a_path: Path, standard_b_path: Path)
+   PURPOSE: Compare two standards
+   PARAMETERS: standard_a_path, standard_b_path
+   RETURNS: ComparisonResult
+   FUNCTIONALITY: Complete comparison
+
+5. _calculate_overall_similarity(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Calculate overall similarity
+   PARAMETERS: doc_a, doc_b
+   RETURNS: Similarity score
+   FUNCTIONALITY: Similarity computation
+
+6. _calculate_category_scores(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Calculate category scores
+   PARAMETERS: doc_a, doc_b
+   RETURNS: Category scores
+   FUNCTIONALITY: Category-specific comparison
+
+7. _extract_category_content(doc: Dict, category: str)
+   PURPOSE: Extract category content
+   PARAMETERS: doc, category
+   RETURNS: Category content
+   FUNCTIONALITY: Content extraction
+
+8. _compute_text_similarity(text_a: str, text_b: str)
+   PURPOSE: Compute text similarity
+   PARAMETERS: text_a, text_b
+   RETURNS: Similarity score
+   FUNCTIONALITY: Text comparison
+
+9. _identify_differences(doc_a: Dict, doc_b: Dict)
+   PURPOSE: Identify differences
+   PARAMETERS: doc_a, doc_b
+   RETURNS: Differences list
+   FUNCTIONALITY: Difference detection
+
+10. _compare_parameters(doc_a: Dict, doc_b: Dict)
+    PURPOSE: Compare parameters
+    PARAMETERS: doc_a, doc_b
+    RETURNS: Parameter differences
+    FUNCTIONALITY: Parameter comparison
+
+11. _generate_recommendations(similarity_score: float, category_scores: Dict, differences: List)
+    PURPOSE: Generate recommendations
+    PARAMETERS: similarity_score, category_scores, differences
+    RETURNS: Recommendations list
+    FUNCTIONALITY: Recommendation generation
+
+12. _determine_compliance_status(similarity_score: float, category_scores: Dict)
+    PURPOSE: Determine compliance status
+    PARAMETERS: similarity_score, category_scores
+    RETURNS: Compliance status
+    FUNCTIONALITY: Compliance assessment
+
+13. search_standards(query: str, top_k: int = 5)
+    PURPOSE: Search standards
+    PARAMETERS: query, top_k
+    RETURNS: Search results
+    FUNCTIONALITY: Standards search
+
+14. get_similar_standards(standard_path: Path, top_k: int = 5)
+    PURPOSE: Get similar standards
+    PARAMETERS: standard_path, top_k
+    RETURNS: Similar standards
+    FUNCTIONALITY: Similarity search
+
+15. analyze_standard_compliance(standard_path: Path, reference_standard: str)
+    PURPOSE: Analyze compliance
+    PARAMETERS: standard_path, reference_standard
+    RETURNS: Compliance analysis
+    FUNCTIONALITY: Compliance analysis
+
+16. generate_comparison_report(comparison_result: ComparisonResult)
+    PURPOSE: Generate report
+    PARAMETERS: comparison_result
+    RETURNS: Report string
+    FUNCTIONALITY: Report generation
+
+17. cluster_standards(standards_paths: List[Path], n_clusters: int = 5)
+    PURPOSE: Cluster standards
+    PARAMETERS: standards_paths, n_clusters
+    RETURNS: Clustering results
+    FUNCTIONALITY: Standards clustering
+
+18. categorize_standards(standards_paths: List[Path])
+    PURPOSE: Categorize standards
+    PARAMETERS: standards_paths
+    RETURNS: Categorization results
+    FUNCTIONALITY: Standards categorization
+
+================================================================================
+WEB INTERFACE FUNCTIONS (web_interface.py)
+================================================================================
+
+1. create_streamlit_app()
+   PURPOSE: Create Streamlit app
+   PARAMETERS: None
+   RETURNS: Streamlit app
+   FUNCTIONALITY: Web application creation
+
+2. create_fastapi_app()
+   PURPOSE: Create FastAPI app
+   PARAMETERS: None
+   RETURNS: FastAPI app
+   FUNCTIONALITY: API application creation
+
+3. create_gradio_interface()
+   PURPOSE: Create Gradio interface
+   PARAMETERS: None
+   RETURNS: Gradio interface
+   FUNCTIONALITY: ML interface creation
+
+4. run_streamlit(host: str = "localhost", port: int = 8501)
+   PURPOSE: Run Streamlit server
+   PARAMETERS: host, port
+   RETURNS: None
+   FUNCTIONALITY: Start Streamlit server
+
+5. run_fastapi(host: str = "localhost", port: int = 8000)
+   PURPOSE: Run FastAPI server
+   PARAMETERS: host, port
+   RETURNS: None
+   FUNCTIONALITY: Start FastAPI server
+
+6. run_gradio(host: str = "localhost", port: int = 7860)
+   PURPOSE: Run Gradio server
+   PARAMETERS: host, port
+   RETURNS: None
+   FUNCTIONALITY: Start Gradio server
+
+STREAMLIT PAGES:
+7. home_page()
+   PURPOSE: Display home page
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Home page content
+
+8. upload_and_process_page()
+   PURPOSE: Upload and process page
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: File upload interface
+
+9. training_page()
+   PURPOSE: Training page
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Training interface
+
+10. comparison_page()
+    PURPOSE: Comparison page
+    PARAMETERS: None
+    RETURNS: None
+    FUNCTIONALITY: Comparison interface
+
+11. analytics_page()
+    PURPOSE: Analytics page
+    PARAMETERS: None
+    RETURNS: None
+    FUNCTIONALITY: Analytics dashboard
+
+12. settings_page()
+    PURPOSE: Settings page
+    PARAMETERS: None
+    RETURNS: None
+    FUNCTIONALITY: Settings interface
+
+FASTAPI ENDPOINTS:
+13. @app.get("/")
+    PURPOSE: Root endpoint
+    PARAMETERS: None
+    RETURNS: API info
+    FUNCTIONALITY: API information
+
+14. @app.post("/upload")
+    PURPOSE: Upload endpoint
+    PARAMETERS: File upload
+    RETURNS: Upload status
+    FUNCTIONALITY: File upload handling
+
+15. @app.post("/train")
+    PURPOSE: Training endpoint
+    PARAMETERS: Training config
+    RETURNS: Training status
+    FUNCTIONALITY: Training initiation
+
+16. @app.post("/compare")
+    PURPOSE: Comparison endpoint
+    PARAMETERS: Comparison request
+    RETURNS: Comparison results
+    FUNCTIONALITY: Standards comparison
+
+17. @app.get("/search")
+    PURPOSE: Search endpoint
+    PARAMETERS: Search query
+    RETURNS: Search results
+    FUNCTIONALITY: Standards search
+
+18. @app.get("/status")
+    PURPOSE: Status endpoint
+    PARAMETERS: None
+    RETURNS: System status
+    FUNCTIONALITY: Health check
+
+================================================================================
+EVALUATION FUNCTIONS (evaluators/)
+================================================================================
+
+SIMPLE LIGHTING EVALUATOR:
+1. evaluate_parameters(parameters: Dict)
+   PURPOSE: Evaluate lighting parameters
+   PARAMETERS: parameters
+   RETURNS: Evaluation results
+   FUNCTIONALITY: Parameter evaluation
+
+2. suggest_lighting_solution(application: str, issues: List)
+   PURPOSE: Suggest lighting solutions
+   PARAMETERS: application, issues
+   RETURNS: Solution suggestions
+   FUNCTIONALITY: Solution generation
+
+REALISTIC LIGHTING EVALUATOR:
+3. evaluate_lighting_report(report_data: Dict)
+   PURPOSE: Evaluate lighting report
+   PARAMETERS: report_data
+   RETURNS: Evaluation results
+   FUNCTIONALITY: Comprehensive evaluation
+
+4. calculate_overall_score(parameter_scores: Dict)
+   PURPOSE: Calculate overall score
+   PARAMETERS: parameter_scores
+   RETURNS: Overall score
+   FUNCTIONALITY: Score calculation
+
+5. determine_status(score: float)
+   PURPOSE: Determine status
+   PARAMETERS: score
+   RETURNS: Status string
+   FUNCTIONALITY: Status determination
+
+BATCH EVALUATOR:
+6. process_pdf_batch(pdf_folder: Path)
+   PURPOSE: Process PDF batch
+   PARAMETERS: pdf_folder
+   RETURNS: Batch results
+   FUNCTIONALITY: Batch processing
+
+7. generate_summary_report(results: List)
+   PURPOSE: Generate summary report
+   PARAMETERS: results
+   RETURNS: Summary report
+   FUNCTIONALITY: Report generation
+
+================================================================================
+UTILITY FUNCTIONS
+================================================================================
+
+ORGANIZATION FUNCTIONS:
+1. organize_files(dry_run: bool = True)
+   PURPOSE: Organize project files
+   PARAMETERS: dry_run
+   RETURNS: None
+   FUNCTIONALITY: File organization
+
+2. create_directories()
+   PURPOSE: Create directory structure
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Directory creation
+
+3. move_files()
+   PURPOSE: Move files to locations
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: File movement
+
+4. cleanup_temp_files()
+   PURPOSE: Clean temporary files
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Cleanup
+
+5. organize_data_files()
+   PURPOSE: Organize data files
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Data organization
+
+PROCESSING FUNCTIONS:
+6. process_pdfs()
+   PURPOSE: Process PDF files
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: PDF processing
+
+7. improve_standards_extraction()
+   PURPOSE: Improve extraction
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Extraction improvement
+
+8. add_standards_data()
+   PURPOSE: Add standards data
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Data addition
+
+9. improve_accuracy()
+   PURPOSE: Improve accuracy
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY: Accuracy improvement
+
+TEST FUNCTIONS:
+10. test_system()
+    PURPOSE: Test system
+    PARAMETERS: None
+    RETURNS: Test results
+    FUNCTIONALITY: System testing
+
+11. test_batch_analyzer()
+    PURPOSE: Test batch analyzer
+    PARAMETERS: None
+    RETURNS: Test results
+    FUNCTIONALITY: Batch analyzer testing
+
+12. test_chat_api()
+    PURPOSE: Test chat API
+    PARAMETERS: None
+    RETURNS: Test results
+    FUNCTIONALITY: API testing
+
+================================================================================
+FUNCTION CATEGORIES
+================================================================================
+
+CORE FUNCTIONS: 50+
+- Configuration management
+- PDF processing
+- AI training
+- Standards comparison
+- Web interfaces
+
+EVALUATION FUNCTIONS: 20+
+- Parameter evaluation
+- Compliance checking
+- Solution suggestions
+- Batch processing
+
+UTILITY FUNCTIONS: 30+
+- File organization
+- Data processing
+- Testing
+- Debugging
+
+WEB FUNCTIONS: 15+
+- Streamlit pages
+- FastAPI endpoints
+- Gradio interfaces
+- Server management
+
+================================================================================
+FUNCTION COMPLEXITY
+================================================================================
+
+SIMPLE FUNCTIONS: 40+
+- Basic operations
+- Data access
+- Simple calculations
+- Status checks
+
+MEDIUM FUNCTIONS: 50+
+- Processing operations
+- Data manipulation
+- Analysis functions
+- Interface functions
+
+COMPLEX FUNCTIONS: 30+
+- AI training
+- Standards comparison
+- Batch processing
+- Web applications
+
+================================================================================
+FUNCTION DEPENDENCIES
+================================================================================
+
+HIGH DEPENDENCY FUNCTIONS:
+- AI training functions
+- Web interface functions
+- Comparison functions
+- Evaluation functions
+
+LOW DEPENDENCY FUNCTIONS:
+- Utility functions
+- Configuration functions
+- Simple processing functions
+- Test functions
+
+================================================================================
+FUNCTION PERFORMANCE
+================================================================================
+
+FAST FUNCTIONS: 60+
+- Configuration access
+- Simple calculations
+- Data validation
+- Status checks
+
+MEDIUM FUNCTIONS: 40+
+- Data processing
+- File operations
+- Analysis functions
+- Interface functions
+
+SLOW FUNCTIONS: 20+
+- AI training
+- PDF processing
+- Batch operations
+- Complex analysis
+
+================================================================================

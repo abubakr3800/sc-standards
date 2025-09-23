@@ -1,0 +1,213 @@
+================================================================================
+CONFIGURATION SYSTEM - src/ai_standards/core/config.py
+================================================================================
+
+FILE: src/ai_standards/core/config.py
+PURPOSE: Central configuration management for the entire system
+LOCATION: src/ai_standards/core/
+DEPENDENCIES:
+- os: Operating system interface
+- pathlib.Path: Object-oriented filesystem paths
+- typing: Type hints (Dict, List, Optional)
+- dotenv: Environment variable loading
+
+================================================================================
+CLASS STRUCTURE
+================================================================================
+
+CLASS: Config
+PURPOSE: Central configuration class containing all system settings
+INSTANCE: config (global instance)
+
+================================================================================
+CONFIGURATION SECTIONS
+================================================================================
+
+1. BASE PATHS
+   PURPOSE: Define all directory paths used by the system
+   VARIABLES:
+   - BASE_DIR: Project root directory (calculated from file location)
+   - DATA_DIR: Data storage directory (BASE_DIR/data)
+   - MODELS_DIR: AI models storage (BASE_DIR/models)
+   - UPLOADS_DIR: Uploaded files (BASE_DIR/uploads)
+   - OUTPUTS_DIR: Output files (BASE_DIR/outputs)
+   - BASE_PDFS_DIR: Original PDFs (BASE_DIR/base)
+   
+   FUNCTIONALITY:
+   - Automatically creates directories if they don't exist
+   - Uses pathlib for cross-platform compatibility
+
+2. PDF PROCESSING SETTINGS
+   PURPOSE: Configure PDF processing behavior
+   SETTINGS:
+   - max_pages: Maximum pages to process (1000)
+   - supported_languages: List of supported languages
+     ["en", "de", "fr", "es", "it", "pt", "nl", "sv", "no", "da", "fi"]
+   - extraction_methods: PDF extraction methods
+     ["pdfplumber", "pymupdf", "pdfminer"]
+   - chunk_size: Text chunk size for processing (1000)
+   - chunk_overlap: Overlap between chunks (200)
+
+3. AI MODEL SETTINGS
+   PURPOSE: Configure AI models and training parameters
+   SETTINGS:
+   - embedding_model: Sentence transformer model
+     "sentence-transformers/all-MiniLM-L6-v2"
+   - translation_model: Translation model
+     "Helsinki-NLP/opus-mt-en-mul"
+   - classification_model: Classification model
+     "distilbert-base-uncased"
+   - max_sequence_length: Maximum input sequence length (512)
+   - batch_size: Training batch size (16)
+   - learning_rate: Learning rate for training (2e-5)
+   - num_epochs: Number of training epochs (3)
+
+4. DATABASE SETTINGS
+   PURPOSE: Configure database connections and storage
+   SETTINGS:
+   - path: SQLite database path (DATA_DIR/standards.db)
+   - vector_db_path: Vector database path (DATA_DIR/vector_db)
+
+5. COMPARISON MODEL SETTINGS
+   PURPOSE: Configure standards comparison behavior
+   SETTINGS:
+   - similarity_threshold: Minimum similarity for matches (0.7)
+   - max_comparisons: Maximum number of comparisons (100)
+   - feature_weights: Weights for different features
+     - illuminance: 0.3
+     - color_rendering: 0.2
+     - glare_control: 0.2
+     - energy_efficiency: 0.15
+     - safety: 0.15
+
+6. API SETTINGS
+   PURPOSE: Configure web API behavior
+   SETTINGS:
+   - host: API host address (from env or "0.0.0.0")
+   - port: API port number (from env or 8000)
+   - debug: Debug mode (from env or true)
+
+7. LOGGING SETTINGS
+   PURPOSE: Configure logging behavior
+   SETTINGS:
+   - level: Log level (from env or "INFO")
+   - format: Log message format
+     "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} - {message}"
+   - file: Log file path (BASE_DIR/logs/app.log)
+
+================================================================================
+ENVIRONMENT VARIABLES
+================================================================================
+
+SUPPORTED ENVIRONMENT VARIABLES:
+- API_HOST: API host address
+- API_PORT: API port number
+- API_DEBUG: API debug mode
+- LOG_LEVEL: Logging level
+- LOG_FILE: Log file name
+
+ENVIRONMENT LOADING:
+- Uses python-dotenv to load .env file
+- Falls back to default values if env vars not set
+- Supports both string and numeric types
+
+================================================================================
+DIRECTORY CREATION
+================================================================================
+
+AUTOMATIC DIRECTORY CREATION:
+The config system automatically creates required directories:
+- data/
+- models/
+- uploads/
+- outputs/
+- base/
+- logs/
+
+DIRECTORY CREATION LOGIC:
+- Uses pathlib.mkdir(exist_ok=True)
+- Prevents errors if directories already exist
+- Ensures all required directories are available
+
+================================================================================
+USAGE PATTERNS
+================================================================================
+
+1. IMPORTING CONFIG:
+   from ai_standards.core.config import config
+
+2. ACCESSING SETTINGS:
+   config.PDF_PROCESSING["max_pages"]
+   config.AI_MODELS["embedding_model"]
+   config.API["host"]
+
+3. PATH ACCESS:
+   config.DATA_DIR / "file.json"
+   config.UPLOADS_DIR / "document.pdf"
+
+4. ENVIRONMENT OVERRIDE:
+   Set environment variables to override defaults
+   export API_PORT=9000
+   export LOG_LEVEL=DEBUG
+
+================================================================================
+CONFIGURATION VALIDATION
+================================================================================
+
+VALIDATION FEATURES:
+- Type checking with type hints
+- Path existence validation
+- Environment variable parsing
+- Default value fallbacks
+
+ERROR HANDLING:
+- Graceful handling of missing environment variables
+- Automatic directory creation
+- Type conversion for numeric values
+
+================================================================================
+EXTENSIBILITY
+================================================================================
+
+ADDING NEW CONFIGURATION:
+1. Add new section to Config class
+2. Define default values
+3. Add environment variable support if needed
+4. Update documentation
+
+EXAMPLE:
+   NEW_SECTION = {
+       "setting1": "default_value",
+       "setting2": int(os.getenv("NEW_SETTING2", "100"))
+   }
+
+================================================================================
+BEST PRACTICES
+================================================================================
+
+1. USE CONFIG INSTANCE:
+   Always use the global config instance, not create new ones
+
+2. ENVIRONMENT VARIABLES:
+   Use environment variables for deployment-specific settings
+
+3. PATH HANDLING:
+   Use pathlib for all path operations
+
+4. TYPE SAFETY:
+   Use type hints for better code documentation
+
+5. DEFAULTS:
+   Always provide sensible default values
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+REQUIRED PACKAGES:
+- os: Standard library for environment variables
+- pathlib: Standard library for path handling
+- typing: Standard library for type hints
+- python-dotenv: Third-party for .env file loading
+
+================================================================================

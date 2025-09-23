@@ -1,0 +1,218 @@
+================================================================================
+MAIN ENTRY POINT - main.py
+================================================================================
+
+FILE: main.py
+PURPOSE: Main entry point for the AI Standards Training System
+LOCATION: Root directory
+DEPENDENCIES: 
+- sys, argparse, pathlib, loguru
+- ai_standards.core.config
+- ai_standards.core.simple_pdf_processor
+- ai_standards.models.ai_trainer
+- ai_standards.models.comparison_model
+- ai_standards.web.web_interface
+
+================================================================================
+IMPORTS AND SETUP
+================================================================================
+
+STANDARD LIBRARIES:
+- sys: System-specific parameters and functions
+- argparse: Command-line argument parsing
+- pathlib.Path: Object-oriented filesystem paths
+- loguru: Advanced logging library
+
+CUSTOM MODULES:
+- ai_standards.core.config: Configuration management
+- ai_standards.core.simple_pdf_processor: PDF processing functionality
+- ai_standards.models.ai_trainer: AI model training
+- ai_standards.models.comparison_model: Standards comparison
+- ai_standards.web.web_interface: Web interface management
+
+================================================================================
+FUNCTIONS
+================================================================================
+
+1. setup_logging()
+   PURPOSE: Configure logging system
+   PARAMETERS: None
+   RETURNS: None
+   FUNCTIONALITY:
+   - Removes default loguru handler
+   - Adds console handler with colorized output
+   - Adds file handler with rotation (10MB) and retention (7 days)
+   - Uses configuration from config.LOGGING
+
+2. process_pdfs_from_directory(pdf_directory: Path, target_language: str = "en")
+   PURPOSE: Process all PDF files in a directory
+   PARAMETERS:
+   - pdf_directory: Path to directory containing PDFs
+   - target_language: Target language for processing (default: "en")
+   RETURNS: List of processed documents
+   FUNCTIONALITY:
+   - Creates SimplePDFProcessor instance
+   - Finds all PDF files in directory
+   - Processes each PDF file
+   - Logs progress and results
+   - Returns list of processed documents
+
+3. train_models_from_processed_data()
+   PURPOSE: Train AI models from processed PDF data
+   PARAMETERS: None
+   RETURNS: Training results dictionary
+   FUNCTIONALITY:
+   - Creates AIStandardsTrainer instance
+   - Loads processed documents from uploads directory
+   - Trains models on the data
+   - Saves training results
+   - Returns training metrics and results
+
+4. compare_standards_cli(standard_a: Path, standard_b: Path)
+   PURPOSE: Compare two standards via command line
+   PARAMETERS:
+   - standard_a: Path to first standard file
+   - standard_b: Path to second standard file
+   RETURNS: Comparison results
+   FUNCTIONALITY:
+   - Loads both standard files
+   - Creates StandardsComparisonModel instance
+   - Performs comparison analysis
+   - Returns detailed comparison results
+
+5. main()
+   PURPOSE: Main function handling command-line interface
+   PARAMETERS: None (uses sys.argv)
+   RETURNS: None
+   FUNCTIONALITY:
+   - Sets up argument parser
+   - Configures logging
+   - Handles different commands (process, train, compare, web, api, demo, dialux)
+   - Executes appropriate functionality based on command
+   - Handles errors and provides feedback
+
+================================================================================
+COMMAND-LINE INTERFACE
+================================================================================
+
+AVAILABLE COMMANDS:
+
+1. process
+   PURPOSE: Process PDFs in base/ folder
+   USAGE: python main.py process [--input-dir DIR] [--target-language LANG]
+   OPTIONS:
+   - --input-dir: Input directory (default: base/)
+   - --target-language: Target language (default: en)
+
+2. train
+   PURPOSE: Train AI models from processed data
+   USAGE: python main.py train
+   OPTIONS: None
+
+3. compare
+   PURPOSE: Compare two standards
+   USAGE: python main.py compare --standard-a FILE1 --standard-b FILE2
+   OPTIONS:
+   - --standard-a: First standard file (required)
+   - --standard-b: Second standard file (required)
+
+4. web
+   PURPOSE: Start Streamlit web interface
+   USAGE: python main.py web [--host HOST] [--port PORT]
+   OPTIONS:
+   - --host: Host address (default: localhost)
+   - --port: Port number (default: 8501)
+
+5. api
+   PURPOSE: Start FastAPI server
+   USAGE: python main.py api [--host HOST] [--port PORT]
+   OPTIONS:
+   - --host: Host address (default: localhost)
+   - --port: Port number (default: 8000)
+
+6. demo
+   PURPOSE: Run complete demo
+   USAGE: python main.py demo
+   OPTIONS: None
+
+7. dialux
+   PURPOSE: Process Dialux PDF report
+   USAGE: python main.py dialux --file FILE
+   OPTIONS:
+   - --file: Path to Dialux PDF file (required)
+
+================================================================================
+ERROR HANDLING
+================================================================================
+
+ERROR TYPES HANDLED:
+1. FileNotFoundError: When PDF files or directories don't exist
+2. ImportError: When required modules can't be imported
+3. Exception: General exceptions during processing
+4. KeyboardInterrupt: User interruption
+
+ERROR RESPONSES:
+- Logs error messages with appropriate level
+- Provides user-friendly error messages
+- Continues execution when possible
+- Exits gracefully on critical errors
+
+================================================================================
+LOGGING CONFIGURATION
+================================================================================
+
+LOG LEVELS:
+- INFO: General information about operations
+- WARNING: Non-critical issues
+- ERROR: Error conditions
+- DEBUG: Detailed debugging information
+
+LOG OUTPUTS:
+1. Console: Colorized output for immediate feedback
+2. File: Persistent logging with rotation and retention
+
+LOG FORMAT:
+- Timestamp
+- Log level
+- Module name
+- Message content
+
+================================================================================
+USAGE EXAMPLES
+================================================================================
+
+1. Process PDFs:
+   python main.py process --input-dir base/ --target-language en
+
+2. Train models:
+   python main.py train
+
+3. Compare standards:
+   python main.py compare --standard-a "EN12464.pdf" --standard-b "BREEAM.pdf"
+
+4. Start web interface:
+   python main.py web --port 8501
+
+5. Start API server:
+   python main.py api --port 8000
+
+6. Process Dialux report:
+   python main.py dialux --file "lighting_report.pdf"
+
+================================================================================
+DEPENDENCIES
+================================================================================
+
+REQUIRED PACKAGES:
+- loguru: Advanced logging
+- pathlib: Path handling
+- argparse: Command-line parsing
+
+CUSTOM DEPENDENCIES:
+- ai_standards.core.config: Configuration
+- ai_standards.core.simple_pdf_processor: PDF processing
+- ai_standards.models.ai_trainer: AI training
+- ai_standards.models.comparison_model: Comparison
+- ai_standards.web.web_interface: Web interface
+
+================================================================================
