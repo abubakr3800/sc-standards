@@ -1,0 +1,59 @@
+# AI Standards Training System - Environment Configuration Template
+# Copy this file to .env and modify the values as needed
+
+# Database Configuration
+DATABASE_PATH=data/standards.db
+VECTOR_DB_PATH=data/vector_db
+
+# API Configuration
+API_HOST=0.0.0.0
+API_PORT=8000
+API_DEBUG=true
+
+# Model Configuration
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
+CLASSIFICATION_MODEL=distilbert-base-uncased
+MAX_SEQUENCE_LENGTH=512
+BATCH_SIZE=16
+LEARNING_RATE=2e-5
+NUM_EPOCHS=3
+
+# PDF Processing Configuration
+MAX_PAGES=1000
+CHUNK_SIZE=1000
+CHUNK_OVERLAP=200
+TARGET_LANGUAGE=en
+
+# Comparison Configuration
+SIMILARITY_THRESHOLD=0.7
+MAX_COMPARISONS=100
+
+# Logging Configuration
+LOG_LEVEL=INFO
+LOG_FILE=logs/app.log
+
+# Google Translate API (Optional - for better translation)
+# GOOGLE_TRANSLATE_API_KEY=your_api_key_here
+
+# OpenAI API (Optional - for advanced features)
+# OPENAI_API_KEY=your_api_key_here
+
+# Hugging Face API (Optional - for model downloads)
+# HUGGINGFACE_API_TOKEN=your_token_here
+
+# Security
+SECRET_KEY=your_secret_key_here_change_this_in_production
+ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+
+# Performance
+MAX_WORKERS=4
+CACHE_SIZE=1000
+ENABLE_GPU=false
+
+# File Upload Limits
+MAX_FILE_SIZE=50MB
+ALLOWED_EXTENSIONS=pdf
+
+# Development/Production
+ENVIRONMENT=development
+DEBUG=true
