@@ -1,0 +1,65 @@
+{
+  "organization_date": "2025-09-24T01:05:44.555210",
+  "directories_created": [
+    "src/ai_standards/processing/",
+    "tests/",
+    "temp_cleanup/"
+  ],
+  "processing_files_moved": [
+    "improve_standards_extraction.py",
+    "process_pdfs.py",
+    "process_standards.py",
+    "enhanced_dialux_extractor.py"
+  ],
+  "test_files_organized": [
+    "test_batch_analyzer.py",
+    "test_chat_api.py",
+    "test_dialux_processor.py",
+    "test_system.py",
+    "accuracy_test.py",
+    "simple_test.py"
+  ],
+  "files_removed": [
+    "debug_detailed.py",
+    "debug_processing.py",
+    "demo_usage.py",
+    "process.bat",
+    "organize_files.py",
+    "quick_organize.py",
+    "filter_essential_files.py",
+    "ESSENTIAL_FILES_GUIDE.md",
+    "essential_filtering_summary.json",
+    "PROJECT_ORGANIZATION.md",
+    "USAGE_GUIDE.md",
+    "ACCURACY_IMPROVEMENT_GUIDE.md",
+    "CHAT_SYSTEM_README.md",
+    "PDF_STUDY_ANALYZER_README.md",
+    "temp/",
+    "__pycache__/",
+    "-p",
+    "=0.14.0",
+    "=0.27.0",
+    "=1.0.0",
+    "requirements-fixed.txt",
+    "requirements-resolved.txt",
+    "accuracy_report.json",
+    "out.json"
+  ],
+  "directories_cleaned": [
+    "examples/",
+    "web/",
+    "studies/",
+    "uploads/"
+  ],
+  "makefile_updated": "Changed 'python' to 'py'",
+  "final_structure": {
+    "src/ai_standards/processing/": "Processing files for base PDFs and database creation",
+    "tests/": "All test files organized",
+    "src/ai_standards/": "Core source code",
+    "tools/": "Main analysis tools",
+    "evaluators/": "Lighting evaluation tools",
+    "scripts/": "Utility scripts",
+    "data/": "Data storage",
+    "structure/": "Documentation"
+  }
+}

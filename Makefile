@@ -41,29 +41,29 @@ help:
 
 # Setup commands
 setup:
-	python scripts/setup_environment.py
+	py scripts/setup_environment.py
 
 install:
-	python scripts/install.py
+	py scripts/install.py
 
 git-setup:
-	python scripts/setup_git.py
+	py scripts/setup_git.py
 
 fix-deps:
-	python scripts/fix_dependencies.py
+	py scripts/fix_dependencies.py
 
 resolve-deps:
-	python scripts/resolve_dependencies.py
+	py scripts/resolve_dependencies.py
 
 # Processing commands
 process:
-	python main.py process
+	py main.py process
 
 auto-process:
-	python auto_process.py
+	py auto_process.py
 
 train:
-	python main.py train
+	py main.py train
 
 compare:
 	@echo "Usage: make compare standard-a=file1.pdf standard-b=file2.pdf"
@@ -71,30 +71,30 @@ compare:
 		echo "Error: Please specify both standard-a and standard-b"; \
 		exit 1; \
 	fi
-	python main.py compare --standard-a "$(standard-a)" --standard-b "$(standard-b)"
+	py main.py compare --standard-a "$(standard-a)" --standard-b "$(standard-b)"
 
 demo:
-	python main.py demo
+	py main.py demo
 
 # Run commands
 run-api:
-	python main.py api
+	py main.py api
 
 run-web:
-	python main.py web
+	py main.py web
 
 # Testing commands
 test:
-	python tests/test_installation.py
+	py tests/test_installation.py
 
 evaluate:
-	python simple_lighting_evaluator.py
+	py simple_lighting_evaluator.py
 
 demo-evaluation:
-	python demo_lighting_evaluation.py
+	py demo_lighting_evaluation.py
 
 test-extract:
-	python examples/table_extraction_demo.py
+	py examples/table_extraction_demo.py
 
 # Docker commands
 docker-build:
@@ -128,9 +128,9 @@ clean-all: clean clean-models clean-data
 # Development commands
 dev-install:
 	pip install -r requirements.txt
-	python -m spacy download en_core_web_sm
-	python -m spacy download de_core_news_sm
-	python -m spacy download fr_core_news_sm
+	py -m spacy download en_core_web_sm
+	py -m spacy download de_core_news_sm
+	py -m spacy download fr_core_news_sm
 
 dev-setup: setup dev-install
 
@@ -150,7 +150,7 @@ backup:
 status:
 	@echo "System Status:"
 	@echo "=============="
-	@echo "Python version: $(shell python --version 2>/dev/null || echo 'Not found')"
+	@echo "Python version: $(shell py --version 2>/dev/null || echo 'Not found')"
 	@echo "PDF files in base/: $(shell ls base/*.pdf 2>/dev/null | wc -l || echo '0')"
 	@echo "Processed files: $(shell ls uploads/*_processed.json 2>/dev/null | wc -l || echo '0')"
 	@echo "Trained models: $(shell ls models/ 2>/dev/null | wc -l || echo '0')"

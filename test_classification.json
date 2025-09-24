@@ -1,0 +1,300 @@
+{
+  "report_name": "EN_12464-1.pdf",
+  "project_name": "lling, rolling, pressing, shaping 300 25 80 For high-bay: see 4.6.2.",
+  "total_rooms": 5,
+  "total_area": 18.9,
+  "overall_compliance_rate": 0.52,
+  "overall_standard_match": "Unknown",
+  "room_analyses": [
+    {
+      "room_name": "EUROPEAN STANDARD EN",
+      "room_type": "General",
+      "area": 6.0,
+      "parameters": [
+        {
+          "name": "illuminance_avg",
+          "value": 20.0,
+          "unit": "lux",
+          "standard_value": 500,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "illuminance_min",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 300,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "uniformity",
+          "value": 300.0,
+          "unit": "ratio",
+          "standard_value": 0.6,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "ugr",
+          "value": 8.0,
+          "unit": "UGR",
+          "standard_value": 19,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "power_density",
+          "value": 0.0,
+          "unit": "W/m\u00b2",
+          "standard_value": 10,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        }
+      ],
+      "overall_compliance": 0.6,
+      "compliance_status": "Warning",
+      "missing_parameters": [],
+      "recommendations": [
+        "Increase illuminance_avg to at least 500 lux",
+        "Increase illuminance_min to at least 300 lux"
+      ]
+    },
+    {
+      "room_name": "Recommended illuminances at the task area",
+      "room_type": "General",
+      "area": 4.3,
+      "parameters": [
+        {
+          "name": "illuminance_avg",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 500,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "illuminance_min",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 300,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "uniformity",
+          "value": 1.0,
+          "unit": "ratio",
+          "standard_value": 0.6,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "ugr",
+          "value": 0.0,
+          "unit": "UGR",
+          "standard_value": 19,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "power_density",
+          "value": 0.0,
+          "unit": "W/m\u00b2",
+          "standard_value": 10,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        }
+      ],
+      "overall_compliance": 0.6,
+      "compliance_status": "Warning",
+      "missing_parameters": [],
+      "recommendations": [
+        "Increase illuminance_avg to at least 500 lux",
+        "Increase illuminance_min to at least 300 lux"
+      ]
+    },
+    {
+      "room_name": "Illuminances of immediate surroundings",
+      "room_type": "General",
+      "area": 4.3,
+      "parameters": [
+        {
+          "name": "illuminance_avg",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 500,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "illuminance_min",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 300,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "uniformity",
+          "value": 0.0,
+          "unit": "ratio",
+          "standard_value": 0.6,
+          "compliance_status": "Non-Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "ugr",
+          "value": 7.0,
+          "unit": "UGR",
+          "standard_value": 19,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "power_density",
+          "value": 0.0,
+          "unit": "W/m\u00b2",
+          "standard_value": 10,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        }
+      ],
+      "overall_compliance": 0.4,
+      "compliance_status": "Non-Compliant",
+      "missing_parameters": [],
+      "recommendations": [
+        "Increase illuminance_avg to at least 500 lux",
+        "Increase illuminance_min to at least 300 lux",
+        "Improve uniformity to at least 0.6"
+      ]
+    },
+    {
+      "room_name": "Uniformity",
+      "room_type": "General",
+      "area": 4.3,
+      "parameters": [
+        {
+          "name": "illuminance_avg",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 500,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "illuminance_min",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 300,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "uniformity",
+          "value": 0.0,
+          "unit": "ratio",
+          "standard_value": 0.6,
+          "compliance_status": "Non-Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "ugr",
+          "value": 8.0,
+          "unit": "UGR",
+          "standard_value": 19,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "power_density",
+          "value": 0.0,
+          "unit": "W/m\u00b2",
+          "standard_value": 10,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        }
+      ],
+      "overall_compliance": 0.4,
+      "compliance_status": "Non-Compliant",
+      "missing_parameters": [],
+      "recommendations": [
+        "Increase illuminance_avg to at least 500 lux",
+        "Increase illuminance_min to at least 300 lux",
+        "Improve uniformity to at least 0.6"
+      ]
+    },
+    {
+      "room_name": "Discomfort glare",
+      "room_type": "General",
+      "area": 0.0,
+      "parameters": [
+        {
+          "name": "illuminance_avg",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 500,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "illuminance_min",
+          "value": 0.0,
+          "unit": "lux",
+          "standard_value": 300,
+          "compliance_status": "Non-Compliant",
+          "importance": "Critical"
+        },
+        {
+          "name": "uniformity",
+          "value": 1.0,
+          "unit": "ratio",
+          "standard_value": 0.6,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "ugr",
+          "value": 8.0,
+          "unit": "UGR",
+          "standard_value": 19,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        },
+        {
+          "name": "power_density",
+          "value": 0.0,
+          "unit": "W/m\u00b2",
+          "standard_value": 10,
+          "compliance_status": "Compliant",
+          "importance": "High"
+        }
+      ],
+      "overall_compliance": 0.6,
+      "compliance_status": "Warning",
+      "missing_parameters": [],
+      "recommendations": [
+        "Increase illuminance_avg to at least 500 lux",
+        "Increase illuminance_min to at least 300 lux"
+      ]
+    }
+  ],
+  "standards_matches": [],
+  "application_type": "General",
+  "critical_issues": [
+    "EUROPEAN STANDARD EN: illuminance_avg is Non-Compliant (20.0 lux vs 500 lux required)",
+    "EUROPEAN STANDARD EN: illuminance_min is Non-Compliant (0.0 lux vs 300 lux required)",
+    "Recommended illuminances at the task area: illuminance_avg is Non-Compliant (0.0 lux vs 500 lux required)",
+    "Recommended illuminances at the task area: illuminance_min is Non-Compliant (0.0 lux vs 300 lux required)",
+    "Illuminances of immediate surroundings: illuminance_avg is Non-Compliant (0.0 lux vs 500 lux required)",
+    "Illuminances of immediate surroundings: illuminance_min is Non-Compliant (0.0 lux vs 300 lux required)",
+    "Uniformity: illuminance_avg is Non-Compliant (0.0 lux vs 500 lux required)",
+    "Uniformity: illuminance_min is Non-Compliant (0.0 lux vs 300 lux required)",
+    "Discomfort glare: illuminance_avg is Non-Compliant (0.0 lux vs 500 lux required)",
+    "Discomfort glare: illuminance_min is Non-Compliant (0.0 lux vs 300 lux required)"
+  ],
+  "recommendations": [
+    "Address compliance issues in 2 rooms"
+  ],
+  "detailed_report": "\nDIALUX REPORT CLASSIFICATION AND ANALYSIS\n========================================\n\nProject: lling, rolling, pressing, shaping 300 25 80 For high-bay: see 4.6.2.\nReport: lling, rolling, pressing, shaping 300 25 80 For high-bay: see 4.6.2.\nAnalysis Date: 2025-09-24 10:58:17\n\nOVERALL ASSESSMENT\n------------------\nApplication Type: General\nTotal Rooms: 5\nTotal Area: 18.9 m\u00b2\nOverall Compliance Rate: 52.0%\nBest Matching Standard: Unknown\n\nSTANDARDS MATCHING\n------------------\nROOM-BY-ROOM ANALYSIS\n---------------------\n\nRoom: EUROPEAN STANDARD EN\nType: General\nArea: 6.0 m\u00b2\nCompliance: Warning (60.0%)\n\nParameters:\n  \u274c illuminance_avg: 20.0 lux (Standard: 500 lux)\n  \u274c illuminance_min: 0.0 lux (Standard: 300 lux)\n  \u2705 uniformity: 300.0 ratio (Standard: 0.6 ratio)\n  \u2705 ugr: 8.0 UGR (Standard: 19 UGR)\n  \u2705 power_density: 0.0 W/m\u00b2 (Standard: 10 W/m\u00b2)\n\nRecommendations:\n  \u2022 Increase illuminance_avg to at least 500 lux\n  \u2022 Increase illuminance_min to at least 300 lux\n\nRoom: Recommended illuminances at the task area\nType: General\nArea: 4.3 m\u00b2\nCompliance: Warning (60.0%)\n\nParameters:\n  \u274c illuminance_avg: 0.0 lux (Standard: 500 lux)\n  \u274c illuminance_min: 0.0 lux (Standard: 300 lux)\n  \u2705 uniformity: 1.0 ratio (Standard: 0.6 ratio)\n  \u2705 ugr: 0.0 UGR (Standard: 19 UGR)\n  \u2705 power_density: 0.0 W/m\u00b2 (Standard: 10 W/m\u00b2)\n\nRecommendations:\n  \u2022 Increase illuminance_avg to at least 500 lux\n  \u2022 Increase illuminance_min to at least 300 lux\n\nRoom: Illuminances of immediate surroundings\nType: General\nArea: 4.3 m\u00b2\nCompliance: Non-Compliant (40.0%)\n\nParameters:\n  \u274c illuminance_avg: 0.0 lux (Standard: 500 lux)\n  \u274c illuminance_min: 0.0 lux (Standard: 300 lux)\n  \u274c uniformity: 0.0 ratio (Standard: 0.6 ratio)\n  \u2705 ugr: 7.0 UGR (Standard: 19 UGR)\n  \u2705 power_density: 0.0 W/m\u00b2 (Standard: 10 W/m\u00b2)\n\nRecommendations:\n  \u2022 Increase illuminance_avg to at least 500 lux\n  \u2022 Increase illuminance_min to at least 300 lux\n  \u2022 Improve uniformity to at least 0.6\n\nRoom: Uniformity\nType: General\nArea: 4.3 m\u00b2\nCompliance: Non-Compliant (40.0%)\n\nParameters:\n  \u274c illuminance_avg: 0.0 lux (Standard: 500 lux)\n  \u274c illuminance_min: 0.0 lux (Standard: 300 lux)\n  \u274c uniformity: 0.0 ratio (Standard: 0.6 ratio)\n  \u2705 ugr: 8.0 UGR (Standard: 19 UGR)\n  \u2705 power_density: 0.0 W/m\u00b2 (Standard: 10 W/m\u00b2)\n\nRecommendations:\n  \u2022 Increase illuminance_avg to at least 500 lux\n  \u2022 Increase illuminance_min to at least 300 lux\n  \u2022 Improve uniformity to at least 0.6\n\nRoom: Discomfort glare\nType: General\nArea: 0.0 m\u00b2\nCompliance: Warning (60.0%)\n\nParameters:\n  \u274c illuminance_avg: 0.0 lux (Standard: 500 lux)\n  \u274c illuminance_min: 0.0 lux (Standard: 300 lux)\n  \u2705 uniformity: 1.0 ratio (Standard: 0.6 ratio)\n  \u2705 ugr: 8.0 UGR (Standard: 19 UGR)\n  \u2705 power_density: 0.0 W/m\u00b2 (Standard: 10 W/m\u00b2)\n\nRecommendations:\n  \u2022 Increase illuminance_avg to at least 500 lux\n  \u2022 Increase illuminance_min to at least 300 lux\n\nOVERALL RECOMMENDATIONS\n----------------------\n\u2022 Address compliance issues in 2 rooms\n"
+}
