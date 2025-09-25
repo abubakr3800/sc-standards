@@ -6,6 +6,8 @@
 
 A comprehensive AI system for processing, understanding, and comparing lighting standards from PDF documents in multiple languages.
 
+**🆕 NEW: Dialux Report Analysis System** - Comprehensive analysis of Dialux lighting reports with intelligent parameter extraction and standards compliance checking.
+
 **Developed by [Short Circuit Company](mailto:Scc@shortcircuitcompany.com)**
 
 ## 📋 Table of Contents
@@ -34,6 +36,10 @@ A comprehensive AI system for processing, understanding, and comparing lighting 
 - **Vector Database**: Store and search through standards using semantic similarity
 - **Web Interface**: User-friendly Streamlit interface for easy interaction
 - **REST API**: FastAPI-based API for programmatic access
+- **🆕 Dialux Report Analysis**: Comprehensive analysis of Dialux lighting reports with intelligent parameter extraction
+- **🆕 Standards Compliance Checking**: Automated compliance assessment against EN 12464-1, BREEAM, and other lighting standards
+- **🆕 Detailed Room Analysis**: Individual room-by-room analysis with complete lighting parameter extraction
+- **🆕 Intelligent Data Processing**: Smart extraction that consolidates data and focuses on actual room spaces
 
 ## Installation
 
@@ -315,9 +321,22 @@ This system is designed for processing and analyzing lighting standards document
 - Email: [Scc@shortcircuitcompany.com](mailto:Scc@shortcircuitcompany.com)
 - GitHub: [https://github.com/abubakr3800/sc-standards](https://github.com/abubakr3800/sc-standards)
 
+## 📚 Documentation
+
+### Latest Updates
+- **[LATEST_NEWS.md](LATEST_NEWS.md)** - Latest features and updates including Dialux Report Analysis System
+- **[DESIGN_PROJECT_STEPS.md](DESIGN_PROJECT_STEPS.md)** - Complete development process and all libraries used
+- **[SYSTEM_OVERVIEW.md](SYSTEM_OVERVIEW.md)** - Comprehensive system overview with new Dialux capabilities
+
+### Core Documentation
+- **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** - Project organization and file structure
+- **[WORKFLOW_EXPLANATION.md](WORKFLOW_EXPLANATION.md)** - Detailed workflow and process explanation
+- **[SETUP_COMPLETE.md](SETUP_COMPLETE.md)** - Setup and installation guide
+
 ## Acknowledgments
 
 - Built with modern Python AI/ML libraries
 - Uses state-of-the-art NLP models for text processing
 - Implements professional software engineering practices
 - Designed for scalability and maintainability
+- **🆕 Enhanced with intelligent Dialux report analysis capabilities**

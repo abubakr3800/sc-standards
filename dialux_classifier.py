@@ -200,11 +200,11 @@ class DialuxReportClassifier:
         print(f"🔍 Classifying Dialux report: {pdf_path.name}")
         
         try:
-            # Import and use the intelligent Dialux processor
-            from intelligent_dialux_processor import IntelligentDialuxProcessor
+            # Import and use the optimized Dialux processor
+            from optimized_dialux_processor import OptimizedDialuxProcessor
             
-            processor = IntelligentDialuxProcessor()
-            dialux_report = processor.process_intelligent_dialux_pdf(pdf_path)
+            processor = OptimizedDialuxProcessor()
+            dialux_report = processor.process_optimized_dialux_pdf(pdf_path)
             
             if not dialux_report:
                 # Try fallback processing for non-standard PDFs

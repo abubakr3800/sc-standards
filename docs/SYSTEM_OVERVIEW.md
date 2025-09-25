@@ -8,6 +8,9 @@ You now have a comprehensive AI system that can:
 2. **Train AI models** - Create custom models that understand lighting standards
 3. **Compare standards** - Analyze similarities and differences between different standards
 4. **Generate insights** - Provide recommendations for harmonization and compliance
+5. **🆕 Analyze Dialux Reports** - Comprehensive analysis of Dialux lighting reports with intelligent parameter extraction
+6. **🆕 Standards Compliance Checking** - Automated compliance assessment against EN 12464-1, BREEAM, and other lighting standards
+7. **🆕 Detailed Room Analysis** - Individual room-by-room analysis with complete lighting parameter extraction
 
 ## 📁 System Components
 
@@ -23,6 +26,18 @@ You now have a comprehensive AI system that can:
 8. **`setup.py`** - Installation and setup script
 9. **`example_usage.py`** - Example usage demonstrations
 10. **`README.md`** - Complete documentation
+
+### 🆕 Dialux Analysis Files:
+
+11. **`dialux_classifier.py`** - Comprehensive Dialux report classifier
+12. **`dialux_classifier_web.py`** - Dedicated Dialux web interface
+13. **`optimized_dialux_processor.py`** - Optimized Dialux PDF processor
+14. **`flexible_dialux_processor.py`** - Flexible Dialux PDF processor
+15. **`intelligent_dialux_processor.py`** - Intelligent Dialux PDF processor
+16. **`comprehensive_dialux_processor.py`** - Comprehensive Dialux PDF processor
+17. **`advanced_dialux_processor.py`** - Advanced Dialux PDF processor
+18. **`improved_dialux_processor.py`** - Improved Dialux PDF processor
+19. **`run_web_interface.py`** - Web interface runner
 
 ## 🚀 Getting Started
 
@@ -51,6 +66,18 @@ python main.py compare --standard-a file1.pdf --standard-b file2.pdf
 python main.py web
 ```
 
+### 6. 🆕 Analyze Dialux Reports
+```bash
+# Analyze single Dialux report
+python main.py dialux --input /path/to/dialux_report.pdf
+
+# Analyze multiple reports
+python main.py dialux --input-dir /path/to/dialux_reports/
+
+# Use dedicated Dialux web interface
+streamlit run dialux_classifier_web.py
+```
+
 ## 🔧 Key Features
 
 ### PDF Processing
@@ -77,6 +104,14 @@ python main.py web
 - **Interactive visualizations**: Charts and graphs
 - **File upload**: Drag-and-drop PDF processing
 - **Real-time results**: Live processing and comparison
+
+### 🆕 Dialux Report Analysis
+- **Intelligent parameter extraction**: Comprehensive extraction of all lighting parameters
+- **Multi-room analysis**: Individual analysis for each room/space in the report
+- **Standards compliance**: Automatic compliance checking against multiple standards
+- **Data quality scoring**: Confidence and completeness scores for each room
+- **Detailed reporting**: Comprehensive reports with recommendations
+- **Web interface**: Dedicated Streamlit interface for Dialux analysis
 
 ## 📊 Standards Categories Analyzed
 
@@ -150,6 +185,12 @@ PDF Files → PDF Processor → Training Data → AI Trainer → Trained Models
          Vector Database ← Embeddings ← Comparison Model
                 ↓
          Web Interface ← API Endpoints ← Comparison Results
+
+🆕 Dialux Reports → Optimized Processor → Room Analysis → Standards Compliance
+                ↓
+         Detailed Reports ← Classifier ← Compliance Checking
+                ↓
+         Dialux Web Interface ← Real-time Analysis ← Export Results
 ```
 
 ## 📋 Next Steps
